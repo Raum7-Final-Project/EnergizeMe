@@ -1,8 +1,18 @@
+import { Routes, Route } from "react-router-dom";
+// import "../src/assets/styles/App.css"
+
+import MainRoutes from "./components/MainRoutes";
+import Layout from "./layout/Layout";
+
 function App() {
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <Layout>
+      <Routes>
+        {MainRoutes.map((route) => (
+          <Route key={route.id} {...route} />
+        ))}
+      </Routes>
+    </Layout>
   );
 }
 
