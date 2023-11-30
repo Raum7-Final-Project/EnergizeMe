@@ -3,10 +3,11 @@ import Header from "../components/Header";
 
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
+
   return (
     <>
       <Header />
-      {children}
+      <main>{children}</main>
       <Footer />
     </>
   );
