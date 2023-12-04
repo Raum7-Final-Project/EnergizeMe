@@ -10,6 +10,7 @@ const Navigation = () => {
     mobile: `md:hidden z-10`,
     desktop: `hidden md:block`,
     ul: `flex gap-2`,
+    burgerLi: `text-white text-2xl border-solid border-2 border-white w-[200px] text-center p-2 m-2 hover:bg-white hover:text-[#1640D6]`,
   };
 
   const [expandBurger, setExpandBurger] = useState(false);
@@ -43,15 +44,15 @@ const Navigation = () => {
         className={
           !expandBurger
             ? "hidden"
-            : "absolute top-[80px] left-0 w-full h-[200px] bg-[#1640D6] flex flex-col justify-center items-center"
+            : "absolute top-[80px] left-0 w-full h-[200px] bg-[#1640D6] flex flex-col justify-center items-center border-t-2 border-t-white"
         }
       >
-        <li>
+        <li className={STYLE.burgerLi}>
           <Link to="" onClick={closeMenu}>
             Home
           </Link>
         </li>
-        <li>
+        <li className={STYLE.burgerLi}>
           <Link to="/login" onClick={closeMenu}>
             Login
           </Link>
