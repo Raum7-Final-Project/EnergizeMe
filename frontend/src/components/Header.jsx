@@ -2,7 +2,7 @@ import Navigation from "./Navigation";
 
 const Header = () => {
   const STYLE = {
-    container: `h-[80px] top-0`,
+    container: `h-[80px] bottom-0`,
   };
 
   return (
