@@ -4,7 +4,7 @@ const FitnessPage = () => {
   };
   return (
     <div className={STYLE.container}>
-      <h2>Fitness</h2>
+      <h2 className="">Fitness</h2>
     </div>
   );
 };
