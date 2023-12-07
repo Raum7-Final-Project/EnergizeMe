@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const URL = "http://localhost:4500/api/users";
+
 const RegisterPage = () => {
-  const history = useNavigate();
   const [inputs, setInputs] = useState({
     username: "",
     email: "",
@@ -20,7 +20,7 @@ const RegisterPage = () => {
 
   const sendRequest = async () => {
     await axios
-      .post("http://localhost:4400/api/users", {
+      .post(URL, {
         username: String(inputs.username),
         email: String(inputs.email),
         password: String(inputs.password),
@@ -28,10 +28,20 @@ const RegisterPage = () => {
       .then((res) => res.data);
   };
 
-  const handelSubmit = (e) => {
+  const handelSubmit = async (e) => {
     e.preventDefault();
 
-    sendRequest().then(() => history("/login"));
+    try {
+      await sendRequest();
+
+      setInputs({
+        username: "",
+        email: "",
+        password: "",
+      });
+    } catch (error) {
+      console.error("Fehler:", error);
+    }
   };
   const STYLE = {
     form: `bg-[#DADACA] grid grid-rows-3 h-screen px-5`,
@@ -58,6 +68,7 @@ const RegisterPage = () => {
               placeholder="Name"
               className={`${STYLE.input} mb-6`}
               onChange={handelChange}
+              value={inputs.username}
             />
 
             <label htmlFor="Email">Email-Adresse</label>
@@ -67,6 +78,7 @@ const RegisterPage = () => {
               placeholder="example@mail.de"
               className={STYLE.input}
               onChange={handelChange}
+              value={inputs.email}
             />
             <label htmlFor="Password">Password</label>
             <input
@@ -75,15 +87,12 @@ const RegisterPage = () => {
               placeholder="●●●●●●●"
               className={STYLE.input}
               onChange={handelChange}
+              value={inputs.password}
             />
           </div>
 
           <div className="m-auto row-span-1">
-            <button
-              type="submit"
-              onClick={sendRequest}
-              className={STYLE.button}
-            >
+            <button type="submit" className={STYLE.button}>
               Registrieren
             </button>
           </div>
