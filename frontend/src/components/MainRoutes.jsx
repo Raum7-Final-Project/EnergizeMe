@@ -16,7 +16,7 @@ const MainRoutes = [
   { path: "/fitness", element: <FitnessPage />, id: 6 },
   { path: "/diet", element: <DietPage/>, id: 7 },
 
-  { path: "*", element: <NotFound />, id: 5 },
+  { path: "*", element: <NotFound />, id: 8 },
 ];
 
 export default MainRoutes;
