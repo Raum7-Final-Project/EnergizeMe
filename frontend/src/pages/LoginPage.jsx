@@ -1,3 +1,8 @@
+import React, { useState } from "react";
+import axios from "axios";
+
+const URL = "http://localhost:5555/api/users/login";
+
 const LoginPage = () => {
   const STYLE = {
     form: `bg-[#DADACA] grid grid-rows-3 h-screen px-5`,
@@ -6,20 +11,61 @@ const LoginPage = () => {
     input: `bg-white w-full p-1 border-b-2 border-[#8F8F7A]`,
     button: `bg-white w-[200px] self-center rounded-full p-2 text-[#8F8F7A] border-[#8F8F7A] border-2 text-xl`,
   };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(URL, {
+        email: email,
+        password: password,
+      });
+
+      // console.log("Login erfolgreich:", response.data);
+      const username = response.data.username;
+      setEmail("");
+      setPassword("");
+      alert(`Erfolgreich eingelogt!Willkommen ,${username}!`);
+    } catch (error) {
+      if (error.response) {
+        console.error("Fehler beim Server:", error.response.data);
+      } else {
+        console.error(error.message);
+      }
+    }
+  };
   return (
-    <form className={STYLE.form}>
+    <form onSubmit={handleLogin} className={STYLE.form}>
       <h2 className={STYLE.heading}>Login</h2>
 
       <div className="flex flex-col items-center gap-1">
         <label htmlFor="Email">Email-Adresse</label>
         <input
           type="text"
+          id="email"
           placeholder="example@mail.de"
           className={STYLE.input}
+          onChange={handleEmailChange}
+          value={email}
         />
         <label htmlFor="Password">Password</label>
-        <input type="password" placeholder="●●●●●●●" className={STYLE.input} />
+        <input
+          type="password"
+          id=""
+          placeholder="●●●●●●●"
+          className={STYLE.input}
+          onChange={handlePasswordChange}
+          value={password}
+        />
       </div>
 
       <div className="m-auto">
