@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SaladImage from "../assets/images/salad-test.jpg";
 
+
 const DietPage = () => {
   const STYLE = {
     container: `bg-white h-screen grid grid-rows-[50px_30px,1fr] gap-1 p-4 overflow-auto`,
@@ -59,6 +60,9 @@ const handleTab = (tab)=>{
       {/* TIPS */}
       <div className={activeTab == "tips" ? "" : "hidden"}>
       <p className="font-bold text-lg">Tips</p>
+
+      </div>
+
       <div className={STYLE.tipsContainer}>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum voluptates quo suscipit ea officia soluta minus illum molestias nihil cum!</p>
 
@@ -80,10 +84,9 @@ const handleTab = (tab)=>{
 
       </div>
       </div>
-     
+
 
     </div>
   );
 };
-
 export default DietPage;
