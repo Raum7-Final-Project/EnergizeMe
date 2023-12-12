@@ -6,6 +6,8 @@ import ProfilePage from "../pages/ProfilePage";
 import ProgressPage from "../pages/ProgressPage";
 import FitnessPage from "../pages/FitnessPage";
 import DietPage from "../pages/DietPage";
+import LandingPage from "../pages/LandingPage"
+import AllFilterPage from "../pages/AllFilterPage";
 
 const MainRoutes = [
   { path: "/", element: <Home />, id: 1 },
@@ -15,8 +17,11 @@ const MainRoutes = [
   { path: "/progress", element: <ProgressPage />, id: 5 },
   { path: "/fitness", element: <FitnessPage />, id: 6 },
   { path: "/diet", element: <DietPage/>, id: 7 },
+  { path: "/landing", element: <LandingPage/>, id: 8 },
+  { path: "/all", element: <AllFilterPage/>, id: 9 },
 
-  { path: "*", element: <NotFound />, id: 8 },
+
+  { path: "*", element: <NotFound />, id: 10 },
 ];
 
 export default MainRoutes;
