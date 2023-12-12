@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const URL = "http://localhost:5555/api/users";
+const URL = "http://localhost:5554/api/users";
 
 const RegisterPage = () => {
   const [inputs, setInputs] = useState({

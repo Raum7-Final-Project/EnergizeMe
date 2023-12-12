@@ -4,9 +4,8 @@ import {
   HiOutlineClock,
   HiOutlineFaceSmile,
 } from "react-icons/hi2";
-import ProgressImage1 from "../assets/images/FitzSoloPractice.svg"
-import ProgressImage2 from "../assets/images/HandsPhone.svg"
-
+import ProgressImage1 from "../assets/images/FitzSoloPractice.svg";
+import ProgressImage2 from "../assets/images/HandsPhone.svg";
 
 const FitnessPage = () => {
   const STYLE = {
@@ -33,9 +32,15 @@ const FitnessPage = () => {
     img2: `bg-[#b8c3c3]  bg-cover bg-center bg-no-repeat h-56 w-screen`,
 
     img3: `bg-[#c3c3b8]  bg-cover bg-center bg-no-repeat h-56 w-screen`,
-
-
   };
+
+  fetch(
+    "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=15&playlistId=UUqjwF8rxRsotnojGl4gM0Zw&key=AIzaSyDyiKsXqQtyM-Z-K6RYD7RywmFf9vdJMkg"
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
   return (
     <>
       <section className={STYLE.container}>
@@ -248,16 +253,14 @@ const FitnessPage = () => {
         {/* Progress + Favorite */}
         <div className={STYLE.startBox4}>
           <div>
-          <p className={STYLE.h3}>dein Fortschritt</p>
-          <img className={STYLE.img2} src={ProgressImage1}></img>
+            <p className={STYLE.h3}>dein Fortschritt</p>
+            <img className={STYLE.img2} src={ProgressImage1}></img>
           </div>
           <div>
-          <p className={STYLE.h3}>gespeicherte Daten</p>
-          <img className={STYLE.img3} src={ProgressImage2}></img>
+            <p className={STYLE.h3}>gespeicherte Daten</p>
+            <img className={STYLE.img3} src={ProgressImage2}></img>
           </div>
         </div>
-        
-
       </section>
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const URL = "http://localhost:5555/api/users/login";
+const URL = "http://localhost:5554/api/users/login";
 
 const LoginPage = () => {
   const STYLE = {
@@ -30,8 +30,9 @@ const LoginPage = () => {
         password: password,
       });
 
-      // console.log("Login erfolgreich:", response.data);
-      const username = response.data.username;
+      console.log("Login erfolgreich:", response.data);
+      const username = response.data.user.username;
+      console.log(username);
       setEmail("");
       setPassword("");
       alert(`Erfolgreich eingelogt!Willkommen ,${username}!`);
