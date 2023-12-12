@@ -14,7 +14,7 @@ const FitnessPage = () => {
 
     heading: `text-4xl text-[#c3c3b8] text-center font-semibold pt-3`,
 
-    startBox: `flex flex-col justify-start pt-1 px-2`,
+    startBox: `flex flex-col justify-start pt-1 px-2 p-6`,
     h3: `text-lg ml-2 font-semibold`,
 
     startBox2: `justify-start pt-1 px-2`,

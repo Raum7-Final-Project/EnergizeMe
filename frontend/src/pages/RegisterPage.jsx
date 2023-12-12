@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const URL = "http://localhost:4500/api/users";
+const URL = "http://localhost:5555/api/users";
 
 const RegisterPage = () => {
   const [inputs, setInputs] = useState({
