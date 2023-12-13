@@ -86,7 +86,7 @@ const handleTab = (tab)=>{
       </div>
 
 
-    </div>
+
   );
 };
 export default DietPage;
