@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const URL = "http://localhost:5555/api/users/login";
 
@@ -43,12 +44,13 @@ const LoginPage = () => {
       }
     }
   };
+  const { t } = useTranslation("common");
   return (
     <form onSubmit={handleLogin} className={STYLE.form}>
-      <h2 className={STYLE.heading}>Login</h2>
+      <h2 className={STYLE.heading}>{t("loginPage.siteTitle")}</h2>
 
       <div className="flex flex-col items-center gap-1">
-        <label htmlFor="Email">Email-Adresse</label>
+        <label htmlFor="Email">{t("loginPage.label_email")}</label>
         <input
           type="text"
           id="email"
@@ -57,7 +59,7 @@ const LoginPage = () => {
           onChange={handleEmailChange}
           value={email}
         />
-        <label htmlFor="Password">Password</label>
+        <label htmlFor="Password">{t("loginPage.label_password")}</label>
         <input
           type="password"
           id=""
@@ -69,7 +71,7 @@ const LoginPage = () => {
       </div>
 
       <div className="m-auto">
-        <button className={STYLE.button}>Login</button>
+        <button className={STYLE.button}>{t("loginPage.btn_login")}</button>
       </div>
     </form>
   );
