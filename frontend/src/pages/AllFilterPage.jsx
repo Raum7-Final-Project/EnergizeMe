@@ -13,7 +13,8 @@ const AllFilterPage = () => {
     categoryLi: `flex flex-col rounded-full shadow bg-white py-2 hover:border-2 border-[#C3C3B8]`,
     categoryText: `text-center `,
   };
-  const [seeAll, setSeeAll] = useState({});
+  const [seeAll, setSeeAll] = useState({
+})
 
   const toggleCategory = (category) => {
     setSeeAll((prevSeeAll) => ({
@@ -26,15 +27,23 @@ const AllFilterPage = () => {
     return seeAll[category] || false;
   };
 
-  const renderCategories = (categories) => {
-    return categories.map((category) => (
-      <li key={category} className={STYLE.categoryLi}>
+
+ const renderCategories = (categories) => {
+    return categories.map(category => {
+      const style = {
+        border: isSeeAll(category) ? '2px solid #C3C3B8' : '2px solid transparent',
+      };
+      return(
+
+      <li style={style} key={category} className={STYLE.categoryLi} onClick={() => toggleCategory(category)}>
         <div className="flex flex-col">
           <p className={STYLE.categoryText}>{category}</p>
         </div>
-      </li>
-    ));
-  };
+      </li>)
+    }
+    );
+  };  
+
 
   const renderMoreLessText = (category) => {
     return isSeeAll(category) ? "Weniger Anzeigen" : "Mehr Anzeigen";
@@ -44,48 +53,54 @@ const AllFilterPage = () => {
     <div className={STYLE.container}>
       <h2 className={STYLE.h2}>Fiteness</h2>
 
-      {/* Kategorie */}
-      <div>
-        <div className={STYLE.sectionContainer}>
-          <div className={STYLE.headingBox}>
-            <h3 className={STYLE.heading}>Kategorie</h3>
-            <h3 className="text-end my-2">filter</h3>
-          </div>
-          <ul className="grid grid-cols-2 gap-2">
-            {renderCategories(
-              [
-                "Anfängerfreundlich",
-                "Arme",
-                "Bauch, Beine, Po",
-                "Cardio",
-                "Entspannung",
-                "Figurtraining",
-                "HIIT",
-                "Kampfsport",
-                "Krafttraining",
-                "Motivation",
-                "Pilates",
-                "Schwangerschaft",
-                "Sixpack",
-                "Stretching",
-                "Tanzen",
-                "Weights",
-                "Yoga",
-              ].slice(0, isSeeAll("Kategorie") ? Infinity : 4)
-            )}
-          </ul>
-          <h3 className={STYLE.h3} onClick={() => toggleCategory("Kategorie")}>
-          {renderMoreLessText("Kategorie")}
-          </h3>
-        </div>
+{/* Kategorie */}
+<div>
+  <div className={STYLE.sectionContainer}>
+    <div className={STYLE.headingBox}>
+      <h3 className={STYLE.heading}>Kategorie</h3>
+
+      <div className="text-end my-2">
+        {Object.values(seeAll).filter((v) => v).length} filter
       </div>
+    </div>
+    <ul className="grid grid-cols-2 gap-2">
+      {renderCategories(
+        [
+          "Anfängerfreundlich",
+          "Arme",
+          "Bauch, Beine, Po",
+          "Cardio",
+          "Entspannung",
+          "Figurtraining",
+          "HIIT",
+          "Kampfsport",
+          "Krafttraining",
+          "Motivation",
+          "Pilates",
+          "Schwangerschaft",
+          "Sixpack",
+          "Stretching",
+          "Tanzen",
+          "Weights",
+          "Yoga",
+        ].slice(0, isSeeAll("Kategorie") ? Infinity : 4)
+      )}
+    </ul>
+    <h3 className={STYLE.h3} onClick={() => toggleCategory("Kategorie")}>
+      {renderMoreLessText("Kategorie")}
+    </h3>
+  </div>
+</div>
+
 
       {/* Schwierigkeit */}
       <div>
         <div className={STYLE.sectionContainer}>
           <div className={STYLE.headingBox}>
             <h3 className={STYLE.heading}>Schwierigkeit</h3>
-            <h3 className="text-end my-2">filter</h3>
+            <div className="text-end my-2">
+              {Object.values(seeAll).filter((v) => v).length} filter
+            </div>
           </div>
           <ul className="grid grid-cols-2 gap-2">
             {renderCategories(
@@ -103,7 +118,9 @@ const AllFilterPage = () => {
         <div className={STYLE.sectionContainer}>
           <div className={STYLE.headingBox}>
             <h3 className={STYLE.heading}>Dauer</h3>
-            <h3 className="text-end my-2">filter</h3>
+            <div className="text-end my-2">
+              {Object.values(seeAll).filter((v) => v).length} filter
+            </div>
           </div>
           <ul className="grid grid-cols-2 gap-2">
             {renderCategories(
@@ -121,7 +138,9 @@ const AllFilterPage = () => {
         <div className={STYLE.sectionContainer}>
           <div className={STYLE.headingBox}>
             <h3 className={STYLE.heading}>Trainer</h3>
-            <h3 className="text-end my-2">filter</h3>
+            <div className="text-end my-2">
+              {Object.values(seeAll).filter((v) => v).length} filter
+            </div>
           </div>
           <ul className="grid grid-cols-2 gap-2">
             {renderCategories(
@@ -142,7 +161,7 @@ const AllFilterPage = () => {
             )}
           </ul>
           <h3 className={STYLE.h3} onClick={() => toggleCategory("Trainer")}>
-          {renderMoreLessText("Trainer")}
+            {renderMoreLessText("Trainer")}
           </h3>
         </div>
       </div>
@@ -152,7 +171,9 @@ const AllFilterPage = () => {
         <div className={STYLE.sectionContainer}>
           <div className={STYLE.headingBox}>
             <h3 className={STYLE.heading}>Muskelgruppe</h3>
-            <h3 className="text-end my-2">filter</h3>
+            <div className="text-end my-2">
+              {Object.values(seeAll).filter((v) => v).length} filter
+            </div>
           </div>
           <ul className="grid grid-cols-2 gap-2">
             {renderCategories(
@@ -170,8 +191,11 @@ const AllFilterPage = () => {
               ].slice(0, isSeeAll("Muskelgruppe") ? Infinity : 4)
             )}
           </ul>
-          <h3 className={STYLE.h3} onClick={() => toggleCategory("Muskelgruppe")}>
-          {renderMoreLessText("Muskelgruppe")}
+          <h3
+            className={STYLE.h3}
+            onClick={() => toggleCategory("Muskelgruppe")}
+          >
+            {renderMoreLessText("Muskelgruppe")}
           </h3>
         </div>
       </div>
@@ -181,7 +205,9 @@ const AllFilterPage = () => {
         <div className={STYLE.sectionContainer}>
           <div className={STYLE.headingBox}>
             <h3 className={STYLE.heading}>Equipment</h3>
-            <h3 className="text-end my-2">filter</h3>
+            <div className="text-end my-2">
+              {Object.values(seeAll).filter((v) => v).length} filter
+            </div>
           </div>
           <ul className="grid grid-cols-2 gap-2">
             {renderCategories(
@@ -207,7 +233,7 @@ const AllFilterPage = () => {
             )}
           </ul>
           <h3 className={STYLE.h3} onClick={() => toggleCategory("Equipment")}>
-          {renderMoreLessText("Equipment")}
+            {renderMoreLessText("Equipment")}
           </h3>
         </div>
       </div>
@@ -217,7 +243,9 @@ const AllFilterPage = () => {
         <div className={STYLE.sectionContainer}>
           <div className={STYLE.headingBox}>
             <h3 className={STYLE.heading}>Ziel</h3>
-            <h3 className="text-end my-2">filter</h3>
+            <div className="text-end my-2">
+              {Object.values(seeAll).filter((v) => v).length} filter
+            </div>
           </div>
           <ul className="grid grid-cols-2 gap-2">
             {renderCategories(
@@ -232,11 +260,14 @@ const AllFilterPage = () => {
             )}
           </ul>
           <h3 className={STYLE.h3} onClick={() => toggleCategory("Ziel")}>
-          {renderMoreLessText("Ziel")}
+            {renderMoreLessText("Ziel")}
           </h3>
         </div>
       </div>
+
+      
     </div>
+
   );
 };
 
