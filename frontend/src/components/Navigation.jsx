@@ -23,7 +23,7 @@ const Navigation = () => {
       <ul className={STYLE.ul}>
         <li className={STYLE.li}>
           <HiOutlineHome className={STYLE.icon} />
-          <Link to="" className={STYLE.link}>
+          <Link to="/landing" className={STYLE.link}>
             Home
           </Link>
         </li>

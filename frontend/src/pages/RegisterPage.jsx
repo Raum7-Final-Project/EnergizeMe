@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 const URL = "http://localhost:4500/api/users";
+import { useNavigate } from "react-router-dom";
+
 
 const RegisterPage = () => {
   const [inputs, setInputs] = useState({

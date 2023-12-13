@@ -9,9 +9,11 @@ import {
   HiOutlineChartBar,
 } from "react-icons/hi2";
 
+import{useState} from 'react'
+
 const ProfilePage = () => {
   const STYLE = {
-    container: `bg-white h-screen grid grid-rows-[50px_30px,150px,100px_repeat(4,_1fr)] gap-1 p-5 overflow-auto`,
+    container: `bg-white h-screen grid grid-rows-[50px_30px,150px,100px_repeat(4,_1fr)] gap-1 p-4 overflow-auto`,
     h2: `text-4xl text-center p-2 text-[#C3C3B8] font-bold`,
     headerContainer: `grid grid-cols-[_repeat(5,_1fr)] grid-rows-1 border-b-gray-300 border-b-2 text-xl text-bold  font-bold tracking-wide gap-4`,
     contentContainer: ``,
@@ -22,16 +24,34 @@ const ProfilePage = () => {
     goalsIcons: `w-[60px] text-2xl text-[#C3C3B8] mx-2`,
     goalsText: `text-start tracking-wide`,
   };
-  const { t } = useTranslation("common");
+
+const { t } = useTranslation("common");
+
+const [activeTab, setActiveTab] = useState("profil")
+
+const handleTab = (tab)=>{
+  setActiveTab(tab)
+}
+
+
+
   return (
     <div className={STYLE.container}>
       <h2 className={STYLE.h2}>{t("profilePage.siteTitle")}</h2>
 
       {/* NAVIGATION PROFILE => Profil | Allgemein */}
       <div className={STYLE.headerContainer}>
+        <p className={activeTab == "profil" ? "border-b-[0.3rem] border-gray-300 b-[0.5rem]" : "text-[#C3C3B8]"} onClick={()=> handleTab("profil")}>Profil</p>
+        <p className={activeTab == "allgemein" ? "border-b-[0.3rem] border-gray-300" : "text-[#C3C3B8]"} onClick={()=> handleTab("allgemein")}>Allgemein</p>
+        
+        
         <p className="text-black">{t("profilePage.tab_profile")}</p>
         <p className="text-[#C3C3B8]">{t("profilePage.tab_general")}</p>
       </div>
+     {/* PROFIL */}
+      <div className={activeTab == "profil" ? "" : "hidden"}>
+        </div>
+
       {/* PROFILE PICTURE */}
       <div className={STYLE.profileImage}>
         <img src="" alt="" />
@@ -79,8 +99,11 @@ const ProfilePage = () => {
               </p>
             </li>
           </ul>
-        </div>
+     
       </div>
+
+ 
+
 
       {/* WIE FIT BIST DU? */}
       <div>
@@ -123,8 +146,9 @@ const ProfilePage = () => {
               </div>
             </li>
           </ul>
+
         </div>
-      </div>
+
 
       {/* WORKOUTS PRO WOCHE */}
       <div>
@@ -155,8 +179,8 @@ const ProfilePage = () => {
               7
             </li>
           </ul>
+
         </div>
-      </div>
 
       {/* FITNESSPROFIL */}
       <div>
@@ -173,9 +197,21 @@ const ProfilePage = () => {
               {t("profilePage.personalInformation.label_weight")}
             </label>
             <input type="text" placeholder="70.5 kg" className="" />
+
           </div>
         </div>
       </div>
+
+      {/* ALLGEMEIN */}
+      <div className={activeTab == "allgemein" ? "" : "hidden"}>
+        <div className="my-4">
+          <p className="font-bold text-lg">Einstellungen</p>
+          <p className="font-bold text-lg">FAQ</p>
+          <p className="font-bold text-lg">Contact</p>
+          <p className="font-bold text-lg">Abmelden</p>
+        </div>
+      </div>
+
     </div>
   );
 };
