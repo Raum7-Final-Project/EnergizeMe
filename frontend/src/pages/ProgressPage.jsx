@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import ExampleImage1 from "../assets/images/exampleImageDurmus1.jpg";
+
 const ProgressPage = () => {
   const STYLE = {
     container: `bg-[#F2F2ED] h-screen grid grid-rows-[50px_30px,1fr] gap-1 p-4 overflow-auto`,
@@ -91,8 +93,93 @@ const ProgressPage = () => {
 
       {/* VERLAUF */}
       <div className={activeTab == "verlauf" ? "" : "hidden"}>
-        <div className="">
-          <p className="font-bold text-lg">Verlauf</p>
+        <div className="grid grid-rows-[30px,1fr]">
+          {/* DATE WORKOUTS MIN CONTAINER */}
+          <div className="flex justify-between my-2 w-full h-full items-center">
+            <p className="border-l-4 border-black">29 NOV.2023</p>
+
+            {/* WORKOUTS MIN CONTAINER */}
+            <div className="flex gap-2">
+              <p>3 Workouts</p>
+              <p>60 Min</p>
+            </div>
+          </div>
+
+          {/* CARDS CONTAINER */}
+          <div className="grid grid-rows my-4 gap-4">
+            {/* CARD 1 */}
+            <div className="border-b-4 grid grid-cols-3">
+              <div className="p-2">
+                <img src={ExampleImage1} alt="" className="h-full w-full" />
+              </div>
+
+              <div className="flex flex-col justify-center col-span-2 p-4">
+                <p className="font-bold">20-Min HIT: Full Body</p>
+                <p>29. NOV. 2023 20:00</p>
+              </div>
+            </div>
+
+            {/* CARD 2 */}
+            <div className="border-b-4 grid grid-cols-3">
+              <div className="p-2">
+                <img src={ExampleImage1} alt="" className="h-full w-full" />
+              </div>
+
+              <div className="flex flex-col justify-center col-span-2 p-4">
+                <p className="font-bold">20-Min HIT: Full Body</p>
+                <p>29. NOV. 2023 20:00</p>
+              </div>
+            </div>
+
+            {/* CARD 3 */}
+            <div className="border-b-4 grid grid-cols-3">
+              <div className="p-2">
+                <img src={ExampleImage1} alt="" className="h-full w-full" />
+              </div>
+
+              <div className="flex flex-col justify-center col-span-2 p-4">
+                <p className="font-bold">20-Min HIT: Full Body</p>
+                <p>29. NOV. 2023 20:00</p>
+              </div>
+            </div>
+
+            {/* DATE WORKOUTS MIN CONTAINER */}
+            <div className="flex justify-between my-2 w-full h-full items-center ">
+            <p className="border-l-4 border-black">27 NOV.2023</p>
+
+              {/* WORKOUTS MIN CONTAINER */}
+              <div className="flex gap-2">
+                <p>2 Workouts</p>
+                <p>40 Min</p>
+              </div>
+            </div>
+
+            {/* CARD 1 */}
+            <div className="border-b-4 grid grid-cols-3">
+              <div className="p-2">
+                <img src={ExampleImage1} alt="" className="h-full w-full" />
+              </div>
+
+              <div className="flex flex-col justify-center col-span-2 p-4">
+                <p className="font-bold">20-Min HIT: Full Body</p>
+                <p>27. NOV. 2023 20:00</p>
+              </div>
+            </div>
+
+            {/* CARD 2 */}
+            <div className="border-b-4 grid grid-cols-3">
+              <div className="p-2">
+                <img src={ExampleImage1} alt="" className="h-full w-full" />
+              </div>
+
+              <div className="flex flex-col justify-center col-span-2 p-4">
+                <p className="font-bold">20-Min HIT: Full Body</p>
+                <p>27. NOV. 2023 20:00</p>
+              </div>
+            </div>
+
+            {/* CARDS END */}
+          </div>
         </div>
       </div>
     </div>
