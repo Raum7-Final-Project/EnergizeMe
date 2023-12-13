@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import {
   HiOutlineUserCircle,
   HiOutlineScale,
@@ -23,6 +25,8 @@ const ProfilePage = () => {
     goalsText: `text-start tracking-wide`,
   };
 
+const { t } = useTranslation("common");
+
 const [activeTab, setActiveTab] = useState("profil")
 
 const handleTab = (tab)=>{
@@ -30,128 +34,170 @@ const handleTab = (tab)=>{
 }
 
 
+
   return (
     <div className={STYLE.container}>
-      <h2 className={STYLE.h2}>Account</h2>
+      <h2 className={STYLE.h2}>{t("profilePage.siteTitle")}</h2>
 
       {/* NAVIGATION PROFILE => Profil | Allgemein */}
       <div className={STYLE.headerContainer}>
         <p className={activeTab == "profil" ? "border-b-[0.3rem] border-gray-300 b-[0.5rem]" : "text-[#C3C3B8]"} onClick={()=> handleTab("profil")}>Profil</p>
         <p className={activeTab == "allgemein" ? "border-b-[0.3rem] border-gray-300" : "text-[#C3C3B8]"} onClick={()=> handleTab("allgemein")}>Allgemein</p>
+        
+        
+        <p className="text-black">{t("profilePage.tab_profile")}</p>
+        <p className="text-[#C3C3B8]">{t("profilePage.tab_general")}</p>
+      </div>
+     {/* PROFIL */}
+      <div className={activeTab == "profil" ? "" : "hidden"}>
+        </div>
+
+      {/* PROFILE PICTURE */}
+      <div className={STYLE.profileImage}>
+        <img src="" alt="" />
+        <HiOutlineUserCircle className="text-[150px] text-[#bbb]" />
+      </div>
+      {/* CONTAINER USER NAME EMAIL ABMELDEN */}
+      <div className="text-center">
+        <p className="font-bold text-lg">{t("profilePage.label_userName")}</p>
+        <p className="text-[#777777]">example@mail.com</p>
+        <button className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold">
+          {t("profilePage.btn_logout")}
+        </button>
       </div>
 
-      {/* PROFIL */}
-      <div className={activeTab == "profil" ? "" : "hidden"}>
-        {/* PROFILE PICTURE */}
-        <div className={STYLE.profileImage}>
-          <img src="" alt="" />
-          <HiOutlineUserCircle className="text-[150px] text-[#bbb]" />
-        </div>
-        {/* CONTAINER USER NAME EMAIL ABMELDEN */}
-        <div className="text-center">
-          <p className="font-bold text-lg">User Name</p>
-          <p className="text-[#777777]">example@mail.com</p>
-          <button className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold">
-            Abmelden
-          </button>
+      {/* EINZELNE SECTION */}
+      {/* TRAININGSZIEL */}
+      <div>
+        <h4 className={STYLE.heading}>
+          {t("profilePage.goals.text_yourGoal")}
+        </h4>
+        <div className={STYLE.sectionContainer}>
+          <ul className="flex flex-col items-center gap-1">
+            <li className={STYLE.goalsLi}>
+              <HiOutlineScale className={STYLE.goalsIcons} />
+              <p className={STYLE.goalsText}>
+                {t("profilePage.goals.goal_lossWeight")}
+              </p>
+            </li>
+            <li className={STYLE.goalsLi}>
+              <HiOutlineSparkles className={STYLE.goalsIcons} />
+              <p className={STYLE.goalsText}>
+                {t("profilePage.goals.goal_tighten_up")}
+              </p>
+            </li>
+            <li className={STYLE.goalsLi}>
+              <HiOutlineFire className={STYLE.goalsIcons} />
+              <p className={STYLE.goalsText}>
+                {t("profilePage.goals.goal_muscle_building")}
+              </p>
+            </li>
+            <li className={STYLE.goalsLi}>
+              <HiArrowPath className={STYLE.goalsIcons} />
+              <p className={STYLE.goalsText}>
+                {t("profilePage.goals.goal_agility")}
+              </p>
+            </li>
+          </ul>
+     
+      </div>
+
+ 
+
+
+      {/* WIE FIT BIST DU? */}
+      <div>
+        <h4 className={STYLE.heading}>
+          {t("profilePage.fitnessLevel.label_howFit")}
+        </h4>
+        <div className={STYLE.sectionContainer}>
+          <ul className="flex flex-col items-center gap-1">
+            <li className={STYLE.goalsLi}>
+              <HiOutlineChartBar className={STYLE.goalsIcons} />
+              <div className="flex flex-col">
+                <p className={STYLE.goalsText}>
+                  {t("profilePage.fitnessLevel.label_not-so-fit")}
+                </p>
+                <p className="text-xs">
+                  {t("profilePage.fitnessLevel.desc_not-so-fit")}
+                </p>
+              </div>
+            </li>
+            <li className={STYLE.goalsLi}>
+              <HiOutlineChartBar className={STYLE.goalsIcons} />
+              <div className="flex flex-col">
+                <p className={STYLE.goalsText}>
+                  {t("profilePage.fitnessLevel.label_relative-fit")}
+                </p>
+                <p className="text-xs">
+                  {t("profilePage.fitnessLevel.desc_relative-fit")}
+                </p>
+              </div>
+            </li>
+            <li className={STYLE.goalsLi}>
+              <HiOutlineChartBar className={STYLE.goalsIcons} />
+              <div className="flex flex-col">
+                <p className={STYLE.goalsText}>
+                  {t("profilePage.fitnessLevel.label_super-fit")}
+                </p>
+                <p className="text-xs">
+                  {t("profilePage.fitnessLevel.desc_super-fit")}
+                </p>
+              </div>
+            </li>
+          </ul>
+
         </div>
 
-        {/* EINZELNE SECTION */}
-        {/* TRAININGSZIEL */}
-        <div>
-          <h4 className={STYLE.heading}>Was ist dein Trainingsziel?</h4>
-          <div className={STYLE.sectionContainer}>
-            <ul className="flex flex-col items-center gap-1">
-              <li className={STYLE.goalsLi}>
-                <HiOutlineScale className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>Abnehmen</p>
-              </li>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineSparkles className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>Straffen</p>
-              </li>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineFire className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>Muskelaufbau</p>
-              </li>
-              <li className={STYLE.goalsLi}>
-                <HiArrowPath className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>Beweglichkeit</p>
-              </li>
-            </ul>
-          </div>
+
+      {/* WORKOUTS PRO WOCHE */}
+      <div>
+        <h4 className={STYLE.heading}>
+          {t("profilePage.label_workoutsPerWeek")}
+        </h4>
+        <div className={STYLE.sectionContainer}>
+          <ul className="grid grid-cols-7 items-center justify-items-center gap-5">
+            <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
+              1
+            </li>
+            <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
+              2
+            </li>
+            <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
+              3
+            </li>
+            <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
+              4
+            </li>
+            <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
+              5
+            </li>
+            <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
+              6
+            </li>
+            <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
+              7
+            </li>
+          </ul>
+
         </div>
 
-        {/* WIE FIT BIST DU? */}
-        <div>
-          <h4 className={STYLE.heading}>Wie fit bist du?</h4>
-          <div className={STYLE.sectionContainer}>
-            <ul className="flex flex-col items-center gap-1">
-              <li className={STYLE.goalsLi}>
-                <HiOutlineChartBar className={STYLE.goalsIcons} />
-                <div className="flex flex-col">
-                  <p className={STYLE.goalsText}>Nicht so fit</p>
-                  <p className="text-xs">Sehr selten bis garkein Sport</p>
-                </div>
-              </li>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineChartBar className={STYLE.goalsIcons} />
-                <div className="flex flex-col">
-                  <p className={STYLE.goalsText}>Relativ fit</p>
-                  <p className="text-xs">1-2 mal Sport die Woche</p>
-                </div>
-              </li>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineChartBar className={STYLE.goalsIcons} />
-                <div className="flex flex-col">
-                  <p className={STYLE.goalsText}>Super fit</p>
-                  <p className="text-xs">Mehr als 2 mal Sport die Woche</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+      {/* FITNESSPROFIL */}
+      <div>
+        <h4 className={STYLE.heading}>
+          {t("profilePage.personalInformation.label_infoAboutYou")}
+        </h4>
+        <div className={STYLE.sectionContainer}>
+          <div className="grid grid-cols-2 grid-rows-2 gap-3">
+            <label htmlFor="">
+              {t("profilePage.personalInformation.label_birthday")}
+            </label>
+            <input type="date" />
+            <label htmlFor="">
+              {t("profilePage.personalInformation.label_weight")}
+            </label>
+            <input type="text" placeholder="70.5 kg" className="" />
 
-        {/* WORKOUTS PRO WOCHE */}
-        <div>
-          <h4 className={STYLE.heading}>Workouts pro Woche</h4>
-          <div className={STYLE.sectionContainer}>
-            <ul className="grid grid-cols-7 items-center justify-items-center gap-5">
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                1
-              </li>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                2
-              </li>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                3
-              </li>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                4
-              </li>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                5
-              </li>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                6
-              </li>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                7
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* FITNESSPROFIL */}
-        <div>
-          <h4 className={STYLE.heading}>Dein persönliches Fitnessprofil</h4>
-          <div className={STYLE.sectionContainer}>
-            <div className="grid grid-cols-2 grid-rows-2 gap-3">
-              <label htmlFor="">Geburtsdatum</label>
-              <input type="date" />
-              <label htmlFor="">Gewicht</label>
-              <input type="text" placeholder="70.5 kg" className="" />
-            </div>
           </div>
         </div>
       </div>
