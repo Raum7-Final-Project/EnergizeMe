@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 // import LandingImage from "../assets/images/chase-kinney-FMQBLyhD2HU-unsplash.jpg"
 
 const HomePage = () => {
@@ -9,20 +10,20 @@ const HomePage = () => {
     startBox: `flex flex-col items-center`,
     button: `bg-white w-[150px] text-center p-3 rounded-full m-4 font-bold text-xl`,
   };
-
+  const { t } = useTranslation("common");
   return (
     <div className={STYLE.container}>
       <div className={STYLE.headingBox}>
-        <h2 className={STYLE.heading}>Fitness Tracker App</h2>
+        <h2 className={STYLE.heading}>{t("homePage.siteTitle")}</h2>
       </div>
 
       <div className={STYLE.startBox}>
         <Link to="/login" className={STYLE.button}>
-          Anmelden
+          {t("homePage.btn_login")}
         </Link>
-        <p className="text-white">Du hast bereits ein Konto?</p>
+        <p className="text-white">{t("homePage.label_already-registred")}</p>
         <Link to="/register" className={STYLE.button}>
-          Registrieren
+          {t("homePage.btn_register")}
         </Link>
       </div>
     </div>
