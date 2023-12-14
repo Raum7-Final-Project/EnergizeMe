@@ -5,9 +5,10 @@ import {
   HiOutlineFire,
   HiArrowPath,
   HiOutlineChartBar,
+  HiMiniNoSymbol,
 } from "react-icons/hi2";
 
-import{useState} from 'react'
+import { useState, useEffect } from "react";
 
 const ProfilePage = () => {
   const STYLE = {
@@ -23,12 +24,40 @@ const ProfilePage = () => {
     goalsText: `text-start tracking-wide`,
   };
 
-const [activeTab, setActiveTab] = useState("profil")
+  const [activeTab, setActiveTab] = useState("profil");
 
-const handleTab = (tab)=>{
-  setActiveTab(tab)
-}
+  const handleTab = (tab) => {
+    setActiveTab(tab);
+  };
 
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    // Lese das Cookie mit dem email
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("email="));
+
+    if (cookieValue) {
+      const email = cookieValue.split("=")[1];
+      setEmail(email);
+    }
+  }, []);
+
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    // lese das Cookie mit dem usernamen
+
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("username="));
+
+    if (cookieValue) {
+      const username = cookieValue.split("=")[1];
+      setUsername(username);
+    }
+  }, []);
 
   return (
     <div className={STYLE.container}>
@@ -36,8 +65,26 @@ const handleTab = (tab)=>{
 
       {/* NAVIGATION PROFILE => Profil | Allgemein */}
       <div className={STYLE.headerContainer}>
-        <p className={activeTab == "profil" ? "border-b-[0.3rem] border-gray-300 b-[0.5rem]" : "text-[#C3C3B8]"} onClick={()=> handleTab("profil")}>Profil</p>
-        <p className={activeTab == "allgemein" ? "border-b-[0.3rem] border-gray-300" : "text-[#C3C3B8]"} onClick={()=> handleTab("allgemein")}>Allgemein</p>
+        <p
+          className={
+            activeTab == "profil"
+              ? "border-b-[0.3rem] border-gray-300 b-[0.5rem]"
+              : "text-[#C3C3B8]"
+          }
+          onClick={() => handleTab("profil")}
+        >
+          Profil
+        </p>
+        <p
+          className={
+            activeTab == "allgemein"
+              ? "border-b-[0.3rem] border-gray-300"
+              : "text-[#C3C3B8]"
+          }
+          onClick={() => handleTab("allgemein")}
+        >
+          Allgemein
+        </p>
       </div>
 
       {/* PROFIL */}
@@ -49,8 +96,8 @@ const handleTab = (tab)=>{
         </div>
         {/* CONTAINER USER NAME EMAIL ABMELDEN */}
         <div className="text-center">
-          <p className="font-bold text-lg">User Name</p>
-          <p className="text-[#777777]">example@mail.com</p>
+          <p className="font-bold text-lg"> Willkommen {username} 👍 😉 </p>
+          <p className="text-[#777777]">{email}</p>
           <button className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold">
             Abmelden
           </button>
@@ -165,7 +212,6 @@ const handleTab = (tab)=>{
           <p className="font-bold text-lg">Abmelden</p>
         </div>
       </div>
-
     </div>
   );
 };

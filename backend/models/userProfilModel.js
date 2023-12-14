@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const userProfilSchema = mongoose.Schema({
+  photo: String,
   email: {
     type: String,
     required: [true, "Please provide your email"],

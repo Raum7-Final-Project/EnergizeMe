@@ -31,7 +31,9 @@ const loginUser = async (req, res) => {
   }
   // compare password
   const token = user.createJWT();
-  res.status(StatusCodes.OK).json({ user: { username: user.username }, token });
+  res
+    .status(StatusCodes.OK)
+    .json({ user: { username: user.username, email: user.email }, token });
 };
 //@desc get user data
 //@route  GET/api/users/me
