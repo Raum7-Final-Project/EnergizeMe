@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   HiOutlineUser,
   HiOutlineBolt,
@@ -33,14 +34,6 @@ const FitnessPage = () => {
 
     img3: `bg-[#c3c3b8]  bg-cover bg-center bg-no-repeat h-56 w-screen`,
   };
-
-  fetch(
-    "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=15&playlistId=UUqjwF8rxRsotnojGl4gM0Zw&key=AIzaSyDyiKsXqQtyM-Z-K6RYD7RywmFf9vdJMkg"
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
   return (
     <>
       <section className={STYLE.container}>

@@ -109,4 +109,5 @@ const DietPage = () => {
     </div>
   );
 };
+
 export default DietPage;
