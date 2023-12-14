@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import {
   HiOutlineMagnifyingGlass,
   HiOutlineUser,
@@ -64,7 +66,9 @@ const LandingPage = () => {
                   <li className={STYLE.li}>
                     <div className={STYLE.h4}>
                       <div className={STYLE.input}>
+                        <Link to="/all">
                         Suche nach Kategorie, Dauer, Schwerigkeit...
+                        </Link>
                       </div>
                     </div>
                   </li>
