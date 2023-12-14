@@ -1,5 +1,4 @@
-import { useTranslation } from "react-i18next";
-
+User;
 import {
   HiOutlineUserCircle,
   HiOutlineScale,
@@ -7,7 +6,6 @@ import {
   HiOutlineFire,
   HiArrowPath,
   HiOutlineChartBar,
-  HiMiniNoSymbol,
 } from "react-icons/hi2";
 
 import { useState, useEffect } from "react";
@@ -32,25 +30,10 @@ const ProfilePage = () => {
     setActiveTab(tab);
   };
 
-  const [email, setEmail] = useState("");
-
-  useEffect(() => {
-    // Lese das Cookie mit dem email
-    const cookieValue = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("email="));
-
-    if (cookieValue) {
-      const email = cookieValue.split("=")[1];
-      setEmail(email);
-    }
-  }, []);
-
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    // lese das Cookie mit dem usernamen
-
+    // Lese das Cookie mit dem Benutzernamen
     const cookieValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith("username="));
@@ -61,11 +44,9 @@ const ProfilePage = () => {
     }
   }, []);
 
-  const { t } = useTranslation("common");
-
   return (
     <div className={STYLE.container}>
-      <h2 className={STYLE.h2}>{t("profilePage.siteTitle")}</h2>
+      <h2 className={STYLE.h2}>Account</h2>
 
       {/* NAVIGATION PROFILE => Profil | Allgemein */}
       <div className={STYLE.headerContainer}>
@@ -90,6 +71,7 @@ const ProfilePage = () => {
           Allgemein
         </p>
       </div>
+
       {/* PROFIL */}
       <div className={activeTab == "profil" ? "" : "hidden"}>
         {/* PROFILE PICTURE */}
@@ -99,45 +81,34 @@ const ProfilePage = () => {
         </div>
         {/* CONTAINER USER NAME EMAIL ABMELDEN */}
         <div className="text-center">
-          <p className="font-bold text-lg"> Willkommen {username} 👍 😉 </p>
-          <p className="text-[#777777]">{email}</p>
-
+          <p className="font-bold text-lg">{username}</p>
+          <p className="text-[#777777]">example@mail.com</p>
           <button className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold">
-            {t("profilePage.btn_logout")}
+            Abmelden
           </button>
         </div>
 
         {/* EINZELNE SECTION */}
         {/* TRAININGSZIEL */}
         <div>
-          <h4 className={STYLE.heading}>
-            {t("profilePage.goals.text_yourGoal")}
-          </h4>
+          <h4 className={STYLE.heading}>Was ist dein Trainingsziel?</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="flex flex-col items-center gap-1">
               <li className={STYLE.goalsLi}>
                 <HiOutlineScale className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>
-                  {t("profilePage.goals.goal_lossWeight")}
-                </p>
+                <p className={STYLE.goalsText}>Abnehmen</p>
               </li>
               <li className={STYLE.goalsLi}>
                 <HiOutlineSparkles className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>
-                  {t("profilePage.goals.goal_tighten_up")}
-                </p>
+                <p className={STYLE.goalsText}>Straffen</p>
               </li>
               <li className={STYLE.goalsLi}>
                 <HiOutlineFire className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>
-                  {t("profilePage.goals.goal_muscle_building")}
-                </p>
+                <p className={STYLE.goalsText}>Muskelaufbau</p>
               </li>
               <li className={STYLE.goalsLi}>
                 <HiArrowPath className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>
-                  {t("profilePage.goals.goal_agility")}
-                </p>
+                <p className={STYLE.goalsText}>Beweglichkeit</p>
               </li>
             </ul>
           </div>
@@ -145,42 +116,28 @@ const ProfilePage = () => {
 
         {/* WIE FIT BIST DU? */}
         <div>
-          <h4 className={STYLE.heading}>
-            {t("profilePage.fitnessLevel.label_howFit")}
-          </h4>
+          <h4 className={STYLE.heading}>Wie fit bist du?</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="flex flex-col items-center gap-1">
               <li className={STYLE.goalsLi}>
                 <HiOutlineChartBar className={STYLE.goalsIcons} />
                 <div className="flex flex-col">
-                  <p className={STYLE.goalsText}>
-                    {t("profilePage.fitnessLevel.label_not-so-fit")}
-                  </p>
-                  <p className="text-xs">
-                    {t("profilePage.fitnessLevel.desc_not-so-fit")}
-                  </p>
+                  <p className={STYLE.goalsText}>Nicht so fit</p>
+                  <p className="text-xs">Sehr selten bis garkein Sport</p>
                 </div>
               </li>
               <li className={STYLE.goalsLi}>
                 <HiOutlineChartBar className={STYLE.goalsIcons} />
                 <div className="flex flex-col">
-                  <p className={STYLE.goalsText}>
-                    {t("profilePage.fitnessLevel.label_relative-fit")}
-                  </p>
-                  <p className="text-xs">
-                    {t("profilePage.fitnessLevel.desc_relative-fit")}
-                  </p>
+                  <p className={STYLE.goalsText}>Relativ fit</p>
+                  <p className="text-xs">1-2 mal Sport die Woche</p>
                 </div>
               </li>
               <li className={STYLE.goalsLi}>
                 <HiOutlineChartBar className={STYLE.goalsIcons} />
                 <div className="flex flex-col">
-                  <p className={STYLE.goalsText}>
-                    {t("profilePage.fitnessLevel.label_super-fit")}
-                  </p>
-                  <p className="text-xs">
-                    {t("profilePage.fitnessLevel.desc_super-fit")}
-                  </p>
+                  <p className={STYLE.goalsText}>Super fit</p>
+                  <p className="text-xs">Mehr als 2 mal Sport die Woche</p>
                 </div>
               </li>
             </ul>
@@ -189,9 +146,7 @@ const ProfilePage = () => {
 
         {/* WORKOUTS PRO WOCHE */}
         <div>
-          <h4 className={STYLE.heading}>
-            {t("profilePage.label_workoutsPerWeek")}
-          </h4>
+          <h4 className={STYLE.heading}>Workouts pro Woche</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="grid grid-cols-7 items-center justify-items-center gap-5">
               <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
@@ -221,23 +176,18 @@ const ProfilePage = () => {
 
         {/* FITNESSPROFIL */}
         <div>
-          <h4 className={STYLE.heading}>
-            {t("profilePage.personalInformation.label_infoAboutYou")}
-          </h4>
+          <h4 className={STYLE.heading}>Dein persönliches Fitnessprofil</h4>
           <div className={STYLE.sectionContainer}>
             <div className="grid grid-cols-2 grid-rows-2 gap-3">
-              <label htmlFor="">
-                {t("profilePage.personalInformation.label_birthday")}
-              </label>
+              <label htmlFor="">Geburtsdatum</label>
               <input type="date" />
-              <label htmlFor="">
-                {t("profilePage.personalInformation.label_weight")}
-              </label>
+              <label htmlFor="">Gewicht</label>
               <input type="text" placeholder="70.5 kg" className="" />
             </div>
           </div>
         </div>
       </div>
+
       {/* ALLGEMEIN */}
       <div className={activeTab == "allgemein" ? "" : "hidden"}>
         <div className="my-4">
