@@ -81,7 +81,7 @@ const LandingPage = () => {
         <img src={LandingImage1}></img>
         <section className={STYLE.contentContainer}>
           <div className={STYLE.Box}>
-            <p className={STYLE.h1}>Hallo, {username}!</p>
+            <p className={STYLE.h1}>{username == "" ? "Hallo, Gast" : `Hallo, ${username}`}</p>
             {/* Search */}
             <div>
               <ul>
