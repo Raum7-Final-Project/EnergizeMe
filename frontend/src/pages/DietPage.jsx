@@ -106,9 +106,7 @@ const DietPage = () => {
           repudiandae ipsum odio incidunt deleniti dolores.
         </p>
       </div>
-
     </div>
-
   );
 };
 
