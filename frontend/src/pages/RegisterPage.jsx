@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-const URL = "http://localhost:4500/api/users";
+const URL = "http://localhost:5554/api/users";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
@@ -10,6 +10,7 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handelChange = (e) => {
     setInputs((prevState) => ({
@@ -40,6 +41,7 @@ const RegisterPage = () => {
         email: "",
         password: "",
       });
+      navigate("/login");
     } catch (error) {
       console.error("Fehler:", error);
     }

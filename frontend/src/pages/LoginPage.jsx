@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const URL = "http://localhost:5554/api/users/login";
 
@@ -34,10 +35,12 @@ const LoginPage = () => {
 
       console.log("Login erfolgreich:", response.data);
       const username = response.data.user.username;
+      const token = response.data.token;
 
-      console.log(username, email);
+      console.log(username, email, token);
       document.cookie = `email=${email}`;
       document.cookie = `username=${username}`;
+      document.cookie = `token=${token}`;
       setEmail("");
       setPassword("");
 

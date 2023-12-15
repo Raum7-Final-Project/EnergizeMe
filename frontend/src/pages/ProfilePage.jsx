@@ -1,4 +1,3 @@
-User;
 import {
   HiOutlineUserCircle,
   HiOutlineScale,
@@ -9,6 +8,7 @@ import {
 } from "react-icons/hi2";
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const STYLE = {
@@ -25,24 +25,56 @@ const ProfilePage = () => {
   };
 
   const [activeTab, setActiveTab] = useState("profil");
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleTab = (tab) => {
     setActiveTab(tab);
   };
 
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
 
+  // die daten von dem Cookie lesen.
   useEffect(() => {
-    // Lese das Cookie mit dem Benutzernamen
     const cookieValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith("username="));
 
     if (cookieValue) {
-      const username = cookieValue.split("=")[1];
-      setUsername(username);
+      const [, storedUsername] = cookieValue.split("=");
+      setUsername(storedUsername);
+    }
+
+    const emailValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("email="));
+
+    if (emailValue) {
+      const [, storedEmail] = emailValue.split("=");
+      setEmail(storedEmail);
     }
   }, []);
+
+  useEffect(() => {
+    // Lese das Token-Cookie
+    const tokenCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="));
+
+    setIsLoggedIn(!!tokenCookie);
+    //setIsLoggedIn(Boolean(tokenCookie));
+  }, []);
+
+  const handleLogout = () => {
+    // Löschen von dem Token ,email und username
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie =
+      "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    //dann wird es zum login page navigiert
+    navigate("/login");
+  };
 
   return (
     <div className={STYLE.container}>
@@ -82,9 +114,12 @@ const ProfilePage = () => {
         {/* CONTAINER USER NAME EMAIL ABMELDEN */}
         <div className="text-center">
           <p className="font-bold text-lg">{username}</p>
-          <p className="text-[#777777]">example@mail.com</p>
-          <button className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold">
-            Abmelden
+          <p className="text-[#777777]">{email}</p>
+          <button
+            onClick={isLoggedIn ? handleLogout : () => navigate("/login")}
+            className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold"
+          >
+            {isLoggedIn ? "Abmelden" : "Login"}
           </button>
         </div>
 
