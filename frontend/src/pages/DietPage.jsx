@@ -89,7 +89,7 @@ const DietPage = () => {
       <div className={STYLE.tipsContainer}>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
-          nesciunt?
+          nesciunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, nulla.
         </p>
       </div>
       <div className={STYLE.tipsContainer}>
