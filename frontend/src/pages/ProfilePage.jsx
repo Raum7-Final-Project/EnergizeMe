@@ -129,22 +129,32 @@ const ProfilePage = () => {
           <h4 className={STYLE.heading}>Was ist dein Trainingsziel?</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="flex flex-col items-center gap-1">
+               <button>
               <li className={STYLE.goalsLi}>
                 <HiOutlineScale className={STYLE.goalsIcons} />
                 <p className={STYLE.goalsText}>Abnehmen</p>
               </li>
+               </button>
+               <button>
               <li className={STYLE.goalsLi}>
                 <HiOutlineSparkles className={STYLE.goalsIcons} />
                 <p className={STYLE.goalsText}>Straffen</p>
               </li>
+               </button>
+               <button>
               <li className={STYLE.goalsLi}>
                 <HiOutlineFire className={STYLE.goalsIcons} />
                 <p className={STYLE.goalsText}>Muskelaufbau</p>
               </li>
+               </button>
+               <button>
               <li className={STYLE.goalsLi}>
                 <HiArrowPath className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>Beweglichkeit</p>
+                <p className={STYLE.goalsText}>
+                  Beweglichkeit
+                  </p>
               </li>
+               </button>
             </ul>
           </div>
         </div>
@@ -154,6 +164,7 @@ const ProfilePage = () => {
           <h4 className={STYLE.heading}>Wie fit bist du?</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="flex flex-col items-center gap-1">
+              <button>
               <li className={STYLE.goalsLi}>
                 <HiOutlineChartBar className={STYLE.goalsIcons} />
                 <div className="flex flex-col">
@@ -161,6 +172,8 @@ const ProfilePage = () => {
                   <p className="text-xs">Sehr selten bis garkein Sport</p>
                 </div>
               </li>
+              </button>
+              <button>
               <li className={STYLE.goalsLi}>
                 <HiOutlineChartBar className={STYLE.goalsIcons} />
                 <div className="flex flex-col">
@@ -168,6 +181,8 @@ const ProfilePage = () => {
                   <p className="text-xs">1-2 mal Sport die Woche</p>
                 </div>
               </li>
+              </button>
+              <button>
               <li className={STYLE.goalsLi}>
                 <HiOutlineChartBar className={STYLE.goalsIcons} />
                 <div className="flex flex-col">
@@ -175,6 +190,7 @@ const ProfilePage = () => {
                   <p className="text-xs">Mehr als 2 mal Sport die Woche</p>
                 </div>
               </li>
+              </button>
             </ul>
           </div>
         </div>
@@ -184,27 +200,43 @@ const ProfilePage = () => {
           <h4 className={STYLE.heading}>Workouts pro Woche</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="grid grid-cols-7 items-center justify-items-center gap-5">
+              <button>
+
               <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
                 1
               </li>
+              </button>
+              <button>
               <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
                 2
               </li>
+              </button>
+              <button>
               <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
                 3
               </li>
+              </button>
+              <button>
               <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
                 4
               </li>
+              </button>
+              <button>
               <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
                 5
               </li>
+              
+              </button>
+              <button>
               <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
                 6
               </li>
+              </button>
+              <button>
               <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
                 7
               </li>
+              </button>
             </ul>
           </div>
         </div>
@@ -232,6 +264,7 @@ const ProfilePage = () => {
           <p className="font-bold text-lg">Abmelden</p>
         </div>
       </div>
+      
     </div>
   );
 };
