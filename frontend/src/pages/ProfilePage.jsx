@@ -239,6 +239,7 @@ const ProfilePage = () => {
               </button>
             </ul>
           </div>
+          
         </div>
 
         {/* FITNESSPROFIL */}
@@ -253,6 +254,11 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
+
+        {/* UPDATE KNOPF - SPEICHERT NEUE INFO */}
+        <div className="text-center">
+        <button className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold">Update</button>
+        </div>
       </div>
 
       {/* ALLGEMEIN */}
@@ -264,7 +270,6 @@ const ProfilePage = () => {
           <p className="font-bold text-lg">Abmelden</p>
         </div>
       </div>
-      
     </div>
   );
 };
