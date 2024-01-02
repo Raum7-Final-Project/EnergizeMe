@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-const URL = "http://localhost:5555/api/users/login";
+const URL = "http://localhost:5554/api/users/login";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const STYLE = {
     form: `bg-[#DADACA] grid grid-rows-3 h-screen px-5`,
     heading: `text-3xl text-center my-4 text-[#8F8F7A]`,
@@ -31,11 +33,18 @@ const LoginPage = () => {
         password: password,
       });
 
-      // console.log("Login erfolgreich:", response.data);
-      const username = response.data.username;
+      console.log("Login erfolgreich:", response.data);
+      const username = response.data.user.username;
+      const token = response.data.token;
+
+      console.log(username, email, token);
+      document.cookie = `email=${email}`;
+      document.cookie = `username=${username}`;
+      document.cookie = `token=${token}`;
       setEmail("");
       setPassword("");
-      alert(`Erfolgreich eingelogt!Willkommen ,${username}!`);
+
+      navigate("/landing");
     } catch (error) {
       if (error.response) {
         console.error("Fehler beim Server:", error.response.data);

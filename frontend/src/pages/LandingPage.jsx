@@ -13,6 +13,7 @@ import LandingImage3 from "../assets/images/Sporttrainer1.png";
 import LandingImage4 from "../assets/images/Sporttrainer2.png";
 import LandingImage5 from "../assets/images/Sporttrainer3.png";
 import LandingImage6 from "../assets/images/Sporttrainer4.png";
+import { useState, useEffect } from "react";
 
 const LandingPage = () => {
   const STYLE = {
@@ -49,13 +50,38 @@ const LandingPage = () => {
 
     input: `text-xs p-1 text-[#777] `,
   };
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+
+  // die daten von dem Cookie lesen.
+  useEffect(() => {
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("username="));
+
+    if (cookieValue) {
+      const [, storedUsername] = cookieValue.split("=");
+      setUsername(storedUsername);
+    }
+
+    const emailValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("email="));
+
+    if (emailValue) {
+      const [, storedEmail] = emailValue.split("=");
+      setEmail(storedEmail);
+    }
+  }, []);
+
   return (
     <>
       <section className={STYLE.container}>
         <img src={LandingImage1}></img>
         <section className={STYLE.contentContainer}>
           <div className={STYLE.Box}>
-            <p className={STYLE.h1}>Hallo, Guest!</p>
+            <p className={STYLE.h1}>{username == "" ? "Hallo, Gast" : `Hallo, ${username}`}</p>
             {/* Search */}
             <div>
               <ul>
@@ -67,7 +93,7 @@ const LandingPage = () => {
                     <div className={STYLE.h4}>
                       <div className={STYLE.input}>
                         <Link to="/all">
-                        Suche nach Kategorie, Dauer, Schwerigkeit...
+                          Suche nach Kategorie, Dauer, Schwerigkeit...
                         </Link>
                       </div>
                     </div>
