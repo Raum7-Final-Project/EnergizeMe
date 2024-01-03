@@ -22,6 +22,22 @@ const userSchema = mongoose.Schema(
       required: [true, "Please provide a password"],
       minlength: 8,
     },
+    fitnessLevel: {
+      type: String,
+    },
+    fitnessGoal: {
+      type: String,
+    },
+
+    workoutsPerWeek: {
+      type: Number,
+    },
+    birthdate: {
+      type: Date,
+    },
+    weight: {
+      type: Number,
+    },
   },
   {
     timestamps: true,
