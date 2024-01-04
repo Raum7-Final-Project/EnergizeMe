@@ -34,6 +34,7 @@ const FitnessPage = () => {
 
     img3: `bg-[#c3c3b8]  bg-cover bg-center bg-no-repeat h-56 w-screen`,
   };
+
   return (
     <>
       <section className={STYLE.container}>
@@ -246,12 +247,16 @@ const FitnessPage = () => {
         {/* Progress + Favorite */}
         <div className={STYLE.startBox4}>
           <div>
-            <p className={STYLE.h3}>dein Fortschritt</p>
-            <img className={STYLE.img2} src={ProgressImage1}></img>
+            <Link to="/progress">
+              <p className={STYLE.h3}>dein Fortschritt</p>
+              <img className={STYLE.img2} src={ProgressImage1}></img>
+            </Link>
           </div>
           <div>
-            <p className={STYLE.h3}>gespeicherte Daten</p>
-            <img className={STYLE.img3} src={ProgressImage2}></img>
+            <Link to="/progress">
+              <p className={STYLE.h3}>gespeicherte Daten</p>
+              <img className={STYLE.img3} src={ProgressImage2}></img>
+            </Link>
           </div>
         </div>
       </section>
