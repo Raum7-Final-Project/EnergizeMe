@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import SaladImage from "../assets/images/salad-test.jpg";
 import ExampleImage1 from "../assets/images/diet1.jpg";
 import ExampleImage2 from "../assets/images/diet2.jpg";
 import ExampleImage3 from "../assets/images/diet3.jpg";
@@ -9,9 +8,11 @@ import ExampleImage6 from "../assets/images/diet6.jpg";
 import ExampleImage7 from "../assets/images/diet7.jpg";
 import ExampleImage9 from "../assets/images/diet9.jpg";
 import ExampleImage10 from "../assets/images/diet10.jpg";
-import ExampleImage11 from "../assets/images/tipps1.jpg";
-import ExampleImage12 from "../assets/images/tipps2.jpg";
-import ExampleImage13 from "../assets/images/tipps3.jpg";
+import ExampleImage11 from "../assets/images/tips1.jpg";
+import ExampleImage12 from "../assets/images/tips2.jpg";
+import ExampleImage13 from "../assets/images/tips3.jpg";
+
+import { Link } from "react-router-dom";
 
 const DietPage = () => {
   const STYLE = {
@@ -25,6 +26,13 @@ const DietPage = () => {
 
   const handleTab = (tab) => {
     setActiveTab(tab);
+  };
+
+  const recipe1 = {
+    id: 1,
+  };
+  const recipe2 = {
+    id: 2,
   };
 
   return (
@@ -60,23 +68,30 @@ const DietPage = () => {
         {/* CARDS CONTAINER */}
         <div className=" grid grid-rows my-4 gap-4">
           {/* CARD 1 */}
-          <div className="bg-white rounded-md shadow-md grid grid-cols-2">
+
+          <Link
+            to={`/recipe/${recipe1.id}`}
+            className="bg-white rounded-md shadow-md grid grid-cols-2"
+          >
             <div className="p-2 ">
               <img
                 src={ExampleImage1}
-                alt="Karotten-Rucola-Salat"
+                alt={recipe1.title}
                 className="h-full w-full"
               />
             </div>
 
-            <div className="flex flex-col justify-center  p-4">
-              <p className="font-bold">Karotten-Rucola-Salat</p>
-              <p>Salat, 15 Min., 151 kcal</p>
+            <div className="flex flex-col justify-center p-4">
+              <p className="font-bold">{recipe1.title}</p>
+              <p>{`Salat, 15 Min., 151 kcal`}</p>
             </div>
-          </div>
+          </Link>
 
           {/* CARD 2 */}
-          <div className="bg-white rounded-md shadow-md grid grid-cols-2">
+          <Link
+            to={`/recipe/${recipe2.id}`}
+            className="bg-white rounded-md shadow-md grid grid-cols-2"
+          >
             <div className="p-2">
               <img
                 src={ExampleImage2}
@@ -89,7 +104,7 @@ const DietPage = () => {
               <p className="font-bold">Teriyaki-Tofu</p>
               <p>Vegetarisch, 30 Min., 436 kcal</p>
             </div>
-          </div>
+          </Link>
 
           {/* CARD 3 */}
           <div className="bg-white rounded-md shadow-md grid grid-cols-2">
@@ -205,25 +220,13 @@ const DietPage = () => {
       {/* TIPS */}
       <div className={activeTab == "tips" ? "" : "hidden"}>
         <div className={STYLE.tipsContainer}>
-        <img
-                src={ExampleImage11}
-                alt="tipps1"
-                className=" w-full"
-              />
+          <img src={ExampleImage11} alt="tips1" className=" w-full" />
         </div>
         <div className={STYLE.tipsContainer}>
-        <img
-                src={ExampleImage12}
-                alt="tipps2"
-                className=" w-full"
-              />
+          <img src={ExampleImage12} alt="tips2" className=" w-full" />
         </div>
         <div className={STYLE.tipsContainer}>
-        <img
-                src={ExampleImage13}
-                alt="tipps1"
-                className=" w-full"
-              />
+          <img src={ExampleImage13} alt="tips1" className=" w-full" />
         </div>
       </div>
     </div>
