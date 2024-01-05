@@ -39,8 +39,15 @@ const ProfilePage = () => {
   const [selectedWorkoutsPerWeek, setSelectedWorkoutsPerWeek] = useState(0);
   const [selectedBirthdate, setSelectedBirthdate] = useState("");
   const [selectedWeight, setSelectedWeight] = useState("");
-  const [selectedFitnessGoal, setselectedFitnessGoal] = useState("");
-  const [selectedFitnessLevel, setselectedFitnessLevel] = useState("");
+  const [selectedFitnessGoal, setselectedFitnessGoal] = useState(null);
+  const [selectedFitnessLevel, setselectedFitnessLevel] = useState(null);
+  const [focusGoal, setFocusGoal] = useState(false);
+  const [focusLevel, setFocusLevel] = useState(false);
+  const [focusBirthdate, setFocusBirthdate] = useState(false);
+  const [focusWeight, setFocusWeight] = useState(false);
+  const [focusWorkoutsPerWeek, setFocusWorkoutsPerWeek] = useState(
+    Array(7).fill(false)
+  );
 
   // die daten von dem Cookie lesen.
   useEffect(() => {
@@ -153,12 +160,20 @@ const ProfilePage = () => {
 
   const handleFitnessGoalClick = (goal) => {
     setselectedFitnessGoal(goal);
+    setFocusGoal(true);
   };
 
   const handleFitnessLevelClick = (level) => {
     setselectedFitnessLevel(level);
+    setFocusLevel(true);
   };
-
+  const handleWorkoutsPerWeekClick = (count) => {
+    const updatedFocus = focusWorkoutsPerWeek.map(
+      (_, index) => index + 1 === count
+    );
+    setSelectedWorkoutsPerWeek(count);
+    setFocusWorkoutsPerWeek(updatedFocus);
+  };
   return (
     <div className={STYLE.container}>
       <h2 className={STYLE.h2}>Account</h2>
@@ -217,6 +232,11 @@ const ProfilePage = () => {
                 <button
                   key={index}
                   onClick={() => handleFitnessGoalClick(goal.text)}
+                  className={`${STYLE.goalsLi} ${
+                    selectedFitnessGoal === goal.text
+                      ? "ring ring-[#C3C3B8] ring-offset-2"
+                      : ""
+                  }`}
                 >
                   <li className={STYLE.goalsLi}>
                     {goal.icon}
@@ -237,6 +257,11 @@ const ProfilePage = () => {
                 <button
                   key={index}
                   onClick={() => handleFitnessLevelClick(level.text)}
+                  className={`${STYLE.goalsLi} ${
+                    selectedFitnessLevel === level.text
+                      ? "ring ring-[#C3C3B8] ring-offset-2"
+                      : ""
+                  }`}
                 >
                   <li className={STYLE.goalsLi}>
                     {level.icon}
@@ -258,15 +283,16 @@ const ProfilePage = () => {
               {[1, 2, 3, 4, 5, 6, 7].map((count) => (
                 <button
                   key={count}
-                  onClick={() => setSelectedWorkoutsPerWeek(count)}
+                  onClick={() => handleWorkoutsPerWeekClick(count)}
+                  className={`shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1 ${
+                    selectedWorkoutsPerWeek === count ? "bg-[#C3C3B8]" : ""
+                  } ${
+                    focusWorkoutsPerWeek[count - 1]
+                      ? "ring ring-[#C3C3B8] ring-offset-2"
+                      : ""
+                  }`}
                 >
-                  <li
-                    className={`shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1 ${
-                      selectedWorkoutsPerWeek === count ? "bg-[#C3C3B8]" : ""
-                    }`}
-                  >
-                    {count}
-                  </li>
+                  <li>{count}</li>
                 </button>
               ))}
             </ul>
@@ -278,18 +304,34 @@ const ProfilePage = () => {
           <h4 className={STYLE.heading}>Dein persönliches Fitnessprofil</h4>
           <div className={STYLE.sectionContainer}>
             <div className="grid grid-cols-2 grid-rows-2 gap-3">
-              <label htmlFor="">Geburtsdatum</label>
+              <label
+                htmlFor="birthdate"
+                className={focusBirthdate ? "text-[#C3C3B8]" : ""}
+              >
+                Geburtsdatum
+              </label>
               <input
                 type="date"
+                id="birthdate"
                 value={selectedBirthdate}
                 onChange={(e) => setSelectedBirthdate(e.target.value)}
+                onFocus={() => setFocusBirthdate(true)}
+                onBlur={() => setFocusBirthdate(false)}
               />
-              <label htmlFor="">Gewicht</label>
+              <label
+                htmlFor="weight"
+                className={focusWeight ? "text-[#C3C3B8]" : ""}
+              >
+                Gewicht
+              </label>
               <input
                 type="text"
+                id="weight"
                 placeholder="70.5 kg"
                 value={selectedWeight}
                 onChange={(e) => setSelectedWeight(e.target.value)}
+                onFocus={() => setFocusWeight(true)}
+                onBlur={() => setFocusWeight(false)}
                 className=""
               />
             </div>

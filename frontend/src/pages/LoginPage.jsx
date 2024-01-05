@@ -54,6 +54,10 @@ const LoginPage = () => {
     }
   };
   const { t } = useTranslation("common");
+  const handleRegisterClick = () => {
+    // Hier wird zur Register-Seite navigiert
+    navigate("/register");
+  };
   return (
     <form onSubmit={handleLogin} className={STYLE.form}>
       <h2 className={STYLE.heading}>{t("loginPage.siteTitle")}</h2>
@@ -81,6 +85,15 @@ const LoginPage = () => {
 
       <div className="m-auto">
         <button className={STYLE.button}>{t("loginPage.btn_login")}</button>
+      </div>
+      <div className="m-auto">
+        <button
+          type="button"
+          onClick={handleRegisterClick}
+          className={STYLE.button}
+        >
+          {t("registerPage.btn_register")}
+        </button>
       </div>
     </form>
   );
