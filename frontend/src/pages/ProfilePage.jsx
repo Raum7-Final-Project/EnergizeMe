@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   HiOutlineUserCircle,
   HiOutlineScale,
@@ -9,6 +10,7 @@ import {
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+const URL = "http://localhost:5554/api/users";
 
 const ProfilePage = () => {
   const STYLE = {
@@ -34,6 +36,18 @@ const ProfilePage = () => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [selectedWorkoutsPerWeek, setSelectedWorkoutsPerWeek] = useState(0);
+  const [selectedBirthdate, setSelectedBirthdate] = useState("");
+  const [selectedWeight, setSelectedWeight] = useState("");
+  const [selectedFitnessGoal, setselectedFitnessGoal] = useState(null);
+  const [selectedFitnessLevel, setselectedFitnessLevel] = useState(null);
+  const [focusGoal, setFocusGoal] = useState(false);
+  const [focusLevel, setFocusLevel] = useState(false);
+  const [focusBirthdate, setFocusBirthdate] = useState(false);
+  const [focusWeight, setFocusWeight] = useState(false);
+  const [focusWorkoutsPerWeek, setFocusWorkoutsPerWeek] = useState(
+    Array(7).fill(false)
+  );
 
   // die daten von dem Cookie lesen.
   useEffect(() => {
@@ -75,7 +89,91 @@ const ProfilePage = () => {
     //dann wird es zum login page navigiert
     navigate("/login");
   };
+  const [token, setToken] = useState(null);
 
+  useEffect(() => {
+    // Lese das Token-Cookie
+    const tokenCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="));
+    const extractedToken = tokenCookie ? tokenCookie.split("=")[1] : null;
+    setToken(extractedToken);
+  }, []);
+
+  const updateProfile = async () => {
+    try {
+      if (!token) {
+        console.error("Token nicht gefunden");
+        return;
+      }
+
+      const selectedData = {
+        workoutsPerWeek: selectedWorkoutsPerWeek,
+        birthdate: selectedBirthdate,
+        weight: selectedWeight,
+        fitnessGoal: selectedFitnessGoal,
+        fitnessLevel: selectedFitnessLevel,
+      };
+
+      await axios.put(URL, selectedData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log("Profil erfolgreich aktualisiert");
+    } catch (error) {
+      console.error("Fehler:", error);
+    }
+  };
+  const trainingGoals = [
+    { text: "Abnehmen", icon: <HiOutlineScale className={STYLE.goalsIcons} /> },
+    {
+      text: "Straffen",
+      icon: <HiOutlineSparkles className={STYLE.goalsIcons} />,
+    },
+    {
+      text: "Muskelaufbau",
+      icon: <HiOutlineFire className={STYLE.goalsIcons} />,
+    },
+    {
+      text: "Beweglichkeit",
+      icon: <HiArrowPath className={STYLE.goalsIcons} />,
+    },
+  ];
+
+  const fitnessLevels = [
+    {
+      text: "Nicht so fit",
+      icon: <HiOutlineChartBar className={STYLE.goalsIcons} />,
+      description: "Sehr selten bis gar kein Sport",
+    },
+    {
+      text: "Relativ fit",
+      icon: <HiOutlineChartBar className={STYLE.goalsIcons} />,
+      description: "1-2 mal Sport die Woche",
+    },
+    {
+      text: "Super fit",
+      icon: <HiOutlineChartBar className={STYLE.goalsIcons} />,
+      description: "Mehr als 2 mal Sport die Woche",
+    },
+  ];
+
+  const handleFitnessGoalClick = (goal) => {
+    setselectedFitnessGoal(goal);
+    setFocusGoal(true);
+  };
+
+  const handleFitnessLevelClick = (level) => {
+    setselectedFitnessLevel(level);
+    setFocusLevel(true);
+  };
+  const handleWorkoutsPerWeekClick = (count) => {
+    const updatedFocus = focusWorkoutsPerWeek.map(
+      (_, index) => index + 1 === count
+    );
+    setSelectedWorkoutsPerWeek(count);
+    setFocusWorkoutsPerWeek(updatedFocus);
+  };
   return (
     <div className={STYLE.container}>
       <h2 className={STYLE.h2}>Account</h2>
@@ -124,37 +222,28 @@ const ProfilePage = () => {
         </div>
 
         {/* EINZELNE SECTION */}
+
         {/* TRAININGSZIEL */}
         <div>
           <h4 className={STYLE.heading}>Was ist dein Trainingsziel?</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="flex flex-col items-center gap-1">
-               <button>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineScale className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>Abnehmen</p>
-              </li>
-               </button>
-               <button>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineSparkles className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>Straffen</p>
-              </li>
-               </button>
-               <button>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineFire className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>Muskelaufbau</p>
-              </li>
-               </button>
-               <button>
-              <li className={STYLE.goalsLi}>
-                <HiArrowPath className={STYLE.goalsIcons} />
-                <p className={STYLE.goalsText}>
-                  Beweglichkeit
-                  </p>
-              </li>
-               </button>
+              {trainingGoals.map((goal, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleFitnessGoalClick(goal.text)}
+                  className={`${STYLE.goalsLi} ${
+                    selectedFitnessGoal === goal.text
+                      ? "ring ring-[#C3C3B8] ring-offset-2"
+                      : ""
+                  }`}
+                >
+                  <li className={STYLE.goalsLi}>
+                    {goal.icon}
+                    <p className={STYLE.goalsText}>{goal.text}</p>
+                  </li>
+                </button>
+              ))}
             </ul>
           </div>
         </div>
@@ -164,82 +253,50 @@ const ProfilePage = () => {
           <h4 className={STYLE.heading}>Wie fit bist du?</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="flex flex-col items-center gap-1">
-              <button>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineChartBar className={STYLE.goalsIcons} />
-                <div className="flex flex-col">
-                  <p className={STYLE.goalsText}>Nicht so fit</p>
-                  <p className="text-xs">Sehr selten bis garkein Sport</p>
-                </div>
-              </li>
-              </button>
-              <button>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineChartBar className={STYLE.goalsIcons} />
-                <div className="flex flex-col">
-                  <p className={STYLE.goalsText}>Relativ fit</p>
-                  <p className="text-xs">1-2 mal Sport die Woche</p>
-                </div>
-              </li>
-              </button>
-              <button>
-              <li className={STYLE.goalsLi}>
-                <HiOutlineChartBar className={STYLE.goalsIcons} />
-                <div className="flex flex-col">
-                  <p className={STYLE.goalsText}>Super fit</p>
-                  <p className="text-xs">Mehr als 2 mal Sport die Woche</p>
-                </div>
-              </li>
-              </button>
+              {fitnessLevels.map((level, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleFitnessLevelClick(level.text)}
+                  className={`${STYLE.goalsLi} ${
+                    selectedFitnessLevel === level.text
+                      ? "ring ring-[#C3C3B8] ring-offset-2"
+                      : ""
+                  }`}
+                >
+                  <li className={STYLE.goalsLi}>
+                    {level.icon}
+                    <div className="flex flex-col">
+                      <p className={STYLE.goalsText}>{level.text}</p>
+                      <p className="text-xs">{level.description}</p>
+                    </div>
+                  </li>
+                </button>
+              ))}
             </ul>
           </div>
         </div>
-
         {/* WORKOUTS PRO WOCHE */}
         <div>
           <h4 className={STYLE.heading}>Workouts pro Woche</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="grid grid-cols-7 items-center justify-items-center gap-5">
-              <button>
-
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                1
-              </li>
-              </button>
-              <button>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                2
-              </li>
-              </button>
-              <button>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                3
-              </li>
-              </button>
-              <button>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                4
-              </li>
-              </button>
-              <button>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                5
-              </li>
-              
-              </button>
-              <button>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                6
-              </li>
-              </button>
-              <button>
-              <li className="shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1">
-                7
-              </li>
-              </button>
+              {[1, 2, 3, 4, 5, 6, 7].map((count) => (
+                <button
+                  key={count}
+                  onClick={() => handleWorkoutsPerWeekClick(count)}
+                  className={`shadow w-10 h-10 rounded-full bg-white text-2xl text-center text-[#C3C3B8] p-1 ${
+                    selectedWorkoutsPerWeek === count ? "bg-[#C3C3B8]" : ""
+                  } ${
+                    focusWorkoutsPerWeek[count - 1]
+                      ? "ring ring-[#C3C3B8] ring-offset-2"
+                      : ""
+                  }`}
+                >
+                  <li>{count}</li>
+                </button>
+              ))}
             </ul>
           </div>
-          
         </div>
 
         {/* FITNESSPROFIL */}
@@ -247,17 +304,48 @@ const ProfilePage = () => {
           <h4 className={STYLE.heading}>Dein persönliches Fitnessprofil</h4>
           <div className={STYLE.sectionContainer}>
             <div className="grid grid-cols-2 grid-rows-2 gap-3">
-              <label htmlFor="">Geburtsdatum</label>
-              <input type="date" />
-              <label htmlFor="">Gewicht</label>
-              <input type="text" placeholder="70.5 kg" className="" />
+              <label
+                htmlFor="birthdate"
+                className={focusBirthdate ? "text-[#C3C3B8]" : ""}
+              >
+                Geburtsdatum
+              </label>
+              <input
+                type="date"
+                id="birthdate"
+                value={selectedBirthdate}
+                onChange={(e) => setSelectedBirthdate(e.target.value)}
+                onFocus={() => setFocusBirthdate(true)}
+                onBlur={() => setFocusBirthdate(false)}
+              />
+              <label
+                htmlFor="weight"
+                className={focusWeight ? "text-[#C3C3B8]" : ""}
+              >
+                Gewicht
+              </label>
+              <input
+                type="text"
+                id="weight"
+                placeholder="70.5 kg"
+                value={selectedWeight}
+                onChange={(e) => setSelectedWeight(e.target.value)}
+                onFocus={() => setFocusWeight(true)}
+                onBlur={() => setFocusWeight(false)}
+                className=""
+              />
             </div>
           </div>
         </div>
 
         {/* UPDATE KNOPF - SPEICHERT NEUE INFO */}
         <div className="text-center">
-        <button className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold">Update</button>
+          <button
+            className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold"
+            onClick={updateProfile}
+          >
+            Update
+          </button>
         </div>
       </div>
 
