@@ -1,13 +1,24 @@
 import { useState } from "react";
-import SaladImage from "../assets/images/salad-test.jpg";
+import ExampleImage1 from "../assets/images/diet1.jpg";
+import ExampleImage2 from "../assets/images/diet2.jpg";
+import ExampleImage3 from "../assets/images/diet3.jpg";
+import ExampleImage4 from "../assets/images/diet4.jpg";
+import ExampleImage5 from "../assets/images/diet5.jpg";
+import ExampleImage6 from "../assets/images/diet6.jpg";
+import ExampleImage7 from "../assets/images/diet7.jpg";
+import ExampleImage9 from "../assets/images/diet9.jpg";
+import ExampleImage10 from "../assets/images/diet10.jpg";
+import ExampleImage11 from "../assets/images/tips1.jpg";
+import ExampleImage12 from "../assets/images/tips2.jpg";
+import ExampleImage13 from "../assets/images/tips3.jpg";
+
+import { Link } from "react-router-dom";
 
 const DietPage = () => {
   const STYLE = {
-    container: `bg-white h-screen grid grid-rows-[50px_30px,1fr] gap-1 p-4 overflow-auto`,
+    container: `bg-[#F2F2ED] h-screen grid grid-rows-[50px_30px,1fr] gap-1 p-4 overflow-auto`,
     h2: `text-4xl text-center p-2 text-[#C3C3B8] font-bold`,
-    headerContainer: `grid grid-cols-[_repeat(5,_1fr)] grid-rows-1 border-b-gray-300 border-b-2 text-xl text-bold  font-bold tracking-wide gap-4`,
-    recipeContainer: `box-border h-1/4 w-auto p4 border-4 mt-1 mb-4 rounded-lg p-7`,
-    recipeImage: ``,
+    headerContainer: `grid grid-cols-[_repeat(5,_1fr)] grid-rows-1 border-b-gray-300 border-b-2 text-xl text-bold font-bold tracking-wide gap-4`,
     tipsContainer: `box-border h-1/4 w-auto p4 border-4 mt-1 mb-4 rounded-lg p-2`,
   };
 
@@ -15,6 +26,13 @@ const DietPage = () => {
 
   const handleTab = (tab) => {
     setActiveTab(tab);
+  };
+
+  const recipe1 = {
+    id: 1,
+  };
+  const recipe2 = {
+    id: 2,
   };
 
   return (
@@ -47,64 +65,169 @@ const DietPage = () => {
 
       {/* REZEPTE */}
       <div className={activeTab == "recipe" ? "" : "hidden"}>
-        <p className="font-bold text-lg">Rezepte</p>
-        <div className={STYLE.recipeContainer}>
-          <h3>Salate</h3>
-          <img src={SaladImage} className={STYLE.recipeImage} />
-        </div>
-        <div className={STYLE.recipeContainer}>
-          <h3>Salate</h3>
-          <img src={SaladImage} className={STYLE.recipeImage} />
-        </div>
-        <div className={STYLE.recipeContainer}>
-          <h3>Salate</h3>
-          <img src={SaladImage} className={STYLE.recipeImage} />
-        </div>
-        <div className={STYLE.recipeContainer}>
-          <h3>Salate</h3>
-          <img src={SaladImage} className={STYLE.recipeImage} />
+        {/* CARDS CONTAINER */}
+        <div className=" grid grid-rows my-4 gap-4">
+          {/* CARD 1 */}
+
+          <Link
+            to={`/recipe/${recipe1.id}`}
+            className="bg-white rounded-md shadow-md grid grid-cols-2"
+          >
+            <div className="p-2 ">
+              <img
+                src={ExampleImage1}
+                alt={recipe1.title}
+                className="h-full w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center p-4">
+              <p className="font-bold">{recipe1.title}</p>
+              <p>{`Salat, 15 Min., 151 kcal`}</p>
+            </div>
+          </Link>
+
+          {/* CARD 2 */}
+          <Link
+            to={`/recipe/${recipe2.id}`}
+            className="bg-white rounded-md shadow-md grid grid-cols-2"
+          >
+            <div className="p-2">
+              <img
+                src={ExampleImage2}
+                alt="Teriyaki-Tofu"
+                className="h-full w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center  p-4">
+              <p className="font-bold">Teriyaki-Tofu</p>
+              <p>Vegetarisch, 30 Min., 436 kcal</p>
+            </div>
+          </Link>
+
+          {/* CARD 3 */}
+          <div className="bg-white rounded-md shadow-md grid grid-cols-2">
+            <div className="p-2">
+              <img
+                src={ExampleImage3}
+                alt="Bircher Müsli mit Banana und Chia"
+                className="h-full w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center  p-4">
+              <p className="font-bold">Bircher Müsli mit Banana und Chia</p>
+              <p>Müsli, 15 Min., 284 kcal</p>
+            </div>
+          </div>
+
+          {/* CARD 4 */}
+          <div className="bg-white rounded-md shadow-md grid grid-cols-2">
+            <div className="p-2">
+              <img
+                src={ExampleImage4}
+                alt="Roggenbrote mit Avocado und Rote-Bete-Aufstrich"
+                className="h-full w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center  p-4">
+              <p className="font-bold">Brot mit Avocado, Rote-Bete-Aufstrich</p>
+              <p>Müsli, 15 Min., 284 kcal</p>
+            </div>
+          </div>
+          {/* CARD 5 */}
+          <div className="bg-white rounded-md shadow-md grid grid-cols-2">
+            <div className="p-2">
+              <img
+                src={ExampleImage5}
+                alt="Köstliche Basilikum Pesto Pasta"
+                className="h-full w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center  p-4">
+              <p className="font-bold">Köstliche Basilikum Pesto Pasta</p>
+              <p>Müsli, 15 Min., 284 kcal</p>
+            </div>
+          </div>
+          {/* CARD 6 */}
+          <div className="bg-white rounded-md shadow-md grid grid-cols-2">
+            <div className="p-2">
+              <img
+                src={ExampleImage6}
+                alt="Brat-Süßkartoffeln mit Spiegelei "
+                className="h-full w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center  p-4">
+              <p className="font-bold">Brat-Süßkartoffeln mit Spiegelei </p>
+              <p>Müsli, 15 Min., 284 kcal</p>
+            </div>
+          </div>
+          {/* CARD 7 */}
+          <div className="bg-white rounded-md shadow-md grid grid-cols-2">
+            <div className="p-2">
+              <img
+                src={ExampleImage7}
+                alt="Rührei mit geräuchertem Lachs und Avocado-Brot
+                "
+                className="h-full w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center  p-4">
+              <p className="font-bold">Rührei mit Lachs und Avocado-Brot</p>
+              <p>Müsli, 15 Min., 284 kcal</p>
+            </div>
+          </div>
+          {/* CARD 9 */}
+          <div className="bg-white rounded-md shadow-md grid grid-cols-2">
+            <div className="p-2">
+              <img
+                src={ExampleImage9}
+                alt="Pfannkuchen mit Hummus"
+                className="h-full w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center  p-4">
+              <p className="font-bold">Pfannkuchen mit Hummus</p>
+              <p>Müsli, 15 Min., 284 kcal</p>
+            </div>
+          </div>
+          {/* CARD 10 */}
+          <div className="bg-white rounded-md shadow-md grid grid-cols-2">
+            <div className="p-2">
+              <img
+                src={ExampleImage10}
+                alt="Kürbissuppe mit Ingwer"
+                className="h-full w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center  p-4">
+              <p className="font-bold">Kürbissuppe mit Ingwer</p>
+              <p>Müsli, 15 Min., 284 kcal</p>
+            </div>
+          </div>
+          {/* CARDS END */}
         </div>
       </div>
 
       {/* TIPS */}
       <div className={activeTab == "tips" ? "" : "hidden"}>
-        <p className="font-bold text-lg">Tips</p>
-      </div>
-
-      <div className={STYLE.tipsContainer}>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-          voluptates quo suscipit ea officia soluta minus illum molestias nihil
-          cum!
-        </p>
-      </div>
-      <div className={STYLE.tipsContainer}>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure, libero
-          voluptatibus. Ducimus accusamus, fugit ab suscipit numquam corporis
-          quod laborum ratione, veniam alias adipisci hic excepturi atque itaque
-          repellendus eveniet!
-        </p>
-      </div>
-      <div className={STYLE.tipsContainer}>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
-          nesciunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, nulla.
-        </p>
-      </div>
-      <div className={STYLE.tipsContainer}>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. In quo rerum
-          sed id eveniet quibusdam pariatur illo. Amet fugit nulla ea neque ad
-          commodi sed ex quas quos magnam eius odio, aperiam dolorem, cupiditate
-          quibusdam.
-        </p>
-      </div>
-      <div className={STYLE.tipsContainer}>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-          repudiandae ipsum odio incidunt deleniti dolores.
-        </p>
+        <div className={STYLE.tipsContainer}>
+          <img src={ExampleImage11} alt="tips1" className=" w-full" />
+        </div>
+        <div className={STYLE.tipsContainer}>
+          <img src={ExampleImage12} alt="tips2" className=" w-full" />
+        </div>
+        <div className={STYLE.tipsContainer}>
+          <img src={ExampleImage13} alt="tips1" className=" w-full" />
+        </div>
       </div>
     </div>
   );
