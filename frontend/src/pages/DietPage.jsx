@@ -30,9 +30,11 @@ const DietPage = () => {
 
   const recipe1 = {
     id: 1,
+    title: "Karotten-Rucola-Salat",
   };
   const recipe2 = {
     id: 2,
+    title: "Teriyaki-Tofu",
   };
 
   return (
@@ -101,7 +103,7 @@ const DietPage = () => {
             </div>
 
             <div className="flex flex-col justify-center  p-4">
-              <p className="font-bold">Teriyaki-Tofu</p>
+              <p className="font-bold">{recipe2.title}</p>
               <p>Vegetarisch, 30 Min., 436 kcal</p>
             </div>
           </Link>
