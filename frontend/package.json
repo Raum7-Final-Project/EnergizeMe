@@ -15,6 +15,7 @@
     "@babel/preset-env": "^7.23.3",
     "axios": "^1.6.2",
     "i18next": "^23.7.8",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.5.0",

@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import ReactPlayer from "react-player/youtube";
+import videos from "../components/Media";
+import _ from "lodash";
 
 import {
   HiOutlineMagnifyingGlass,
@@ -53,7 +56,8 @@ const LandingPage = () => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-
+  // für die Videos
+  const [selectedCategory, setSelectedCategory] = useState("all");
   // die daten von dem Cookie lesen.
   useEffect(() => {
     const cookieValue = document.cookie
@@ -75,6 +79,19 @@ const LandingPage = () => {
     }
   }, []);
 
+  const filteredVideos =
+    selectedCategory === "all"
+      ? videos
+      : videos.filter((video) => video.category === selectedCategory);
+
+  const randomVideos = _.shuffle(filteredVideos);
+
+  const showAllVideos = randomVideos.map((video) => (
+    <div key={video.id} className={STYLE.Box}>
+      <ReactPlayer url={video.videoUrl} height={300} width={400} />
+    </div>
+  ));
+
   return (
     <>
       <section className={STYLE.container}>
@@ -85,7 +102,17 @@ const LandingPage = () => {
               {username == "" ? "Hallo, Gast" : `Hallo, ${username}`}
             </p>
           </div>
-
+          {/*Videos */}
+          <button onClick={() => setSelectedCategory("beginner")}>
+            Anfänger
+          </button>
+          <button onClick={() => setSelectedCategory("advanced")}>
+            Fortgeschritten
+          </button>
+          <button onClick={() => setSelectedCategory("all")}>
+            Zeige alle Videos
+          </button>
+          <div>{showAllVideos}</div>
           {/* Nutrition */}
           <div className={STYLE.Box}>
             <div>
