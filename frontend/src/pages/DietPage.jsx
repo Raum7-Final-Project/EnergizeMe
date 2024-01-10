@@ -12,7 +12,8 @@ const DietPage = () => {
     container: `bg-[#F2F2ED] h-screen grid grid-rows-[50px_30px,1fr] gap-1 p-4 overflow-auto`,
     h2: `text-4xl text-center p-2 text-[#C3C3B8] font-bold`,
     headerContainer: `grid grid-cols-[_repeat(5,_1fr)] grid-rows-1 border-b-gray-300 border-b-2 text-xl text-bold font-bold tracking-wide gap-4`,
-    tipsContainer: `box-border h-1/4 w-auto p4 border-4 mt-1 mb-4 rounded-lg p-2`,
+    tipsContainer: `box-border h-1/3 w-auto mt-1 mb-4 rounded-lg pt-1`,
+    tipsContent: `shadow-xl rounded hover:shadow-2xl`,
   };
 
   const [activeTab, setActiveTab] = useState("recipe");
@@ -81,13 +82,20 @@ const DietPage = () => {
       {/* TIPS */}
       <div className={activeTab == "tips" ? "" : "hidden"}>
         <div className={STYLE.tipsContainer}>
-          <img src={ExampleImage11} alt="tips1" className=" w-full" />
+          <a href="https://www.aok.de/pk/magazin/wohlbefinden/schlaf/10-schlafmythen-im-check-das-hilft-fuer-einen-gesunden-schlaf/" target="blank">
+          <img src={ExampleImage11} alt="tips1" className={STYLE.tipsContent} />
+          </a>
         </div>
         <div className={STYLE.tipsContainer}>
-          <img src={ExampleImage12} alt="tips2" className=" w-full" />
+          <a href="https://www.aok.de/pk/magazin/ernaehrung/gesunde-ernaehrung/lebensmittel-gesund-einkaufen-so-einfach-gehts/" target="blank">
+          <img src={ExampleImage12} alt="tips2" className={STYLE.tipsContent} />
+          </a>
         </div>
         <div className={STYLE.tipsContainer}>
-          <img src={ExampleImage13} alt="tips1" className=" w-full" />
+          <a href="https://www.aok.de/pk/magazin/ernaehrung/lebensmittel/calcium-in-welchen-lebensmitteln-ist-es-enthalten/" target="blank">
+          <img src={ExampleImage13} alt="tips3" className={STYLE.tipsContent} />
+
+          </a>
         </div>
       </div>
     </div>
