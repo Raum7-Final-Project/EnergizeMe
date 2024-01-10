@@ -86,11 +86,25 @@ const LandingPage = () => {
 
   const randomVideos = _.shuffle(filteredVideos);
 
-  const showAllVideos = randomVideos.map((video) => (
+  /*  const showAllVideos = randomVideos.map((video) => (
     <div key={video.id} className={STYLE.Box}>
       <ReactPlayer url={video.videoUrl} height={300} width={400} />
     </div>
-  ));
+  )); */
+
+  let renderedVideos = 0;
+
+  const showAllVideos = randomVideos.map((video) => {
+    if (renderedVideos <= 4) {
+      renderedVideos++;
+      return (
+        <div key={video.id} className={STYLE.Box}>
+          <ReactPlayer url={video.videoUrl} height={300} width={400} />
+        </div>
+      );
+    }
+    return null; // Wenn mehr als fünf Videos gerendert wurden, gib null zurück (oder irgendetwas, das nicht gerendert wird)
+  });
 
   return (
     <>
