@@ -7,8 +7,10 @@ import {
   loginUser,
   updateProfile,
   requireAuth,
+  verificationUser,
 } from "../controllers/userController.js";
 router.post("/", registerUser);
+router.get("/verify/:id/:token", verificationUser);
 router.put("/", requireAuth, updateProfile);
 
 router.post("/login", loginUser);

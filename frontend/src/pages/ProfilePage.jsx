@@ -10,7 +10,7 @@ import {
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-const URL = "http://localhost:5554/api/users";
+const URL = "http://localhost:3333/api/users";
 
 const ProfilePage = () => {
   const STYLE = {

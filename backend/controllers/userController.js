@@ -1,9 +1,11 @@
 import asyncHandler from "express-async-handler";
-import User from "../models/userModel.js";
+import User from "../models/User.js";
 import BadRequestError from "../errors/bad-request.js";
 import UnauthenticatedError from "../errors/unauthenticated.js";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
+import Token from "../models/Token.js";
+import sendEmail from "../utils/email.js";
 
 //@desc  Register new user
 //@route  POST/api/users
@@ -11,9 +13,44 @@ import jwt from "jsonwebtoken";
 const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({ ...req.body });
   const token = user.createJWT();
-  res
-    .status(StatusCodes.CREATED)
-    .json({ user: { username: user.username }, token });
+  const verificationToken = new Token({ userId: user._id, token });
+
+  await verificationToken.save();
+
+  const verificationLink = `${process.env.BASE_URL}/api/users/verify/${user._id}/${token}`;
+  console.log(verificationLink);
+
+  await sendEmail(user.email, "Verify Email", verificationLink);
+
+  res.status(StatusCodes.CREATED).json({
+    user: { username: user.username },
+    token,
+  });
+});
+
+const verificationUser = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+
+    if (!user) return res.status(400).send("Invalid ");
+
+    const token = await Token.findOne({
+      userId: user._id,
+      token: req.params.token,
+    });
+
+    if (!token) return res.status(400).send("Invalid link");
+    console.log(token);
+
+    await User.updateOne({ _id: user._id }, { $set: { verified: true } });
+
+    //await Token.findByIdAndDelete(token._id);
+
+    res.send("email verified sucessfully");
+  } catch (error) {
+    console.error(error);
+    res.status(400).send("An error occurred");
+  }
 });
 //@desc Login new user
 //@route  POST/api/users/login
@@ -29,13 +66,16 @@ const loginUser = async (req, res) => {
   }
   const isPasswordCorrect = await user.comparePassword(password);
   if (!isPasswordCorrect) {
-    throw new UnauthenticatedError("Invalid Credentials");
+    throw new UnauthenticatedError("Invalid Password or Email");
   }
   // compare password
   const token = user.createJWT();
-  res
-    .status(StatusCodes.OK)
-    .json({ user: { username: user.username, email: user.email }, token });
+
+  res.status(StatusCodes.OK).json({
+    user: { username: user.username, email: user.email },
+    token,
+    message: "An email sent to your account. Please verify.",
+  });
 };
 
 const requireAuth = (req, res, next) => {
@@ -101,4 +141,11 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json({ id: _id, username, email });
 });
 
-export { registerUser, loginUser, getMe, requireAuth, updateProfile };
+export {
+  registerUser,
+  loginUser,
+  getMe,
+  requireAuth,
+  updateProfile,
+  verificationUser,
+};
