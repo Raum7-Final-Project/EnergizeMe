@@ -21,13 +21,26 @@ const RegisterPage = () => {
   };
 
   const sendRequest = async () => {
-    await axios
-      .post(URL, {
+    try {
+      const response = await axios.post("http://localhost:3333/api/users", {
         username: String(inputs.username),
         email: String(inputs.email),
         password: String(inputs.password),
-      })
-      .then((res) => res.data);
+      });
+      console.log(response.data);
+      console.log(response.data.user);
+
+      if (response.data) {
+        const token = response.data.token;
+        const id = response.data.user.id;
+        console.log("User ID and Token:", id, token);
+
+        navigate(`/verify/${id}/${token}`);
+        //navigate("/progress");
+      }
+    } catch (error) {
+      console.error("Fehler:", error);
+    }
   };
 
   const handelSubmit = async (e) => {
@@ -41,7 +54,6 @@ const RegisterPage = () => {
         email: "",
         password: "",
       });
-      navigate("/login");
     } catch (error) {
       console.error("Fehler:", error);
     }
