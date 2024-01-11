@@ -21,7 +21,7 @@ import { useState, useEffect } from "react";
 const LandingPage = () => {
   const STYLE = {
     container: `bg-[#F2F2ED] bg-cover bg-center bg-no-repeat h-screen w-screen flex flex-col overflow-auto`,
-    contentContainer: `grid grid-rows gap-1 p-4 w-full`,
+    contentContainer: `grid grid-rows w-full`,
 
     Box: `flex flex-col justify- pt-1`,
     img: `bg-[url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center bg-no-repeat h-56 w-screen`,
@@ -57,7 +57,8 @@ const LandingPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   // für die Videos
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  // buttons for videos
+  const [selectedCategory] = useState("all");
   // die daten von dem Cookie lesen.
   useEffect(() => {
     const cookieValue = document.cookie
@@ -84,26 +85,23 @@ const LandingPage = () => {
       ? videos
       : videos.filter((video) => video.category === selectedCategory);
 
+  // randomisiert die videos
   const randomVideos = _.shuffle(filteredVideos);
 
-  /*  const showAllVideos = randomVideos.map((video) => (
-    <div key={video.id} className={STYLE.Box}>
-      <ReactPlayer url={video.videoUrl} height={300} width={400} />
-    </div>
-  )); */
-
+  // setzt die gerenderten videos auf 0
   let renderedVideos = 0;
 
+  // map funktion welche nur 5 videos rendert
   const showAllVideos = randomVideos.map((video) => {
     if (renderedVideos <= 4) {
       renderedVideos++;
       return (
         <div key={video.id} className={STYLE.Box}>
-          <ReactPlayer url={video.videoUrl} height={300} width={400} />
+          <ReactPlayer url={video.videoUrl} height={280} width={390} />
         </div>
       );
     }
-    return null; // Wenn mehr als fünf Videos gerendert wurden, gib null zurück (oder irgendetwas, das nicht gerendert wird)
+    return null;
   });
 
   return (
@@ -117,7 +115,7 @@ const LandingPage = () => {
             </p>
           </div>
           {/*Videos */}
-          <button onClick={() => setSelectedCategory("beginner")}>
+          {/* <button onClick={() => setSelectedCategory("beginner")}>
             Anfänger
           </button>
           <button onClick={() => setSelectedCategory("advanced")}>
@@ -125,13 +123,15 @@ const LandingPage = () => {
           </button>
           <button onClick={() => setSelectedCategory("all")}>
             Zeige alle Videos
-          </button>
+          </button> */}
           <div>{showAllVideos}</div>
           {/* Nutrition */}
           <div className={STYLE.Box}>
             <div>
               <p className={STYLE.h3}>Tipps: Rezepte für gesunde Mahlzeiten</p>
-              <img className={STYLE.img2} src={LandingImage2}></img>
+              <Link to="/diet">
+                <img className={STYLE.img2} src={LandingImage2}></img>
+              </Link>
             </div>
           </div>
         </section>

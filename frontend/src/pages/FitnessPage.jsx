@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
-import {
-  HiOutlineUser,
-  HiOutlineBolt,
-  HiOutlineClock,
-  HiOutlineFaceSmile,
-} from "react-icons/hi2";
 import ProgressImage1 from "../assets/images/FitzSoloPractice.svg";
 import ProgressImage2 from "../assets/images/HandsPhone.svg";
+import ReactPlayer from "react-player/youtube";
+import videos from "../components/Media";
+import _ from "lodash";
+import { useState } from "react";
 
 const FitnessPage = () => {
   const STYLE = {
     container: `bg-[#F2F2ED] bg-cover bg-center bg-no-repeat h-screen w-screen flex flex-col overflow-auto`,
+    Box: `flex flex-col justify- pt-1`,
 
     heading: `text-4xl text-[#c3c3b8] text-center font-semibold pt-3`,
 
@@ -34,214 +33,51 @@ const FitnessPage = () => {
 
     img3: `bg-[#c3c3b8]  bg-cover bg-center bg-no-repeat h-56 w-screen`,
   };
+  /* videos/mediaplayer */
+
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const filteredVideos =
+    selectedCategory === "all"
+      ? videos
+      : videos.filter((video) => video.category === selectedCategory);
+
+  // randomisiert die videos
+  const randomVideos = _.shuffle(filteredVideos);
+
+  // setzt die gerenderten videos auf 0
+  let renderedVideos = 0;
+
+  // map funktion welche nur 7 videos rendert
+  const showAllVideos = randomVideos.map((video) => {
+    if (renderedVideos <= 6) {
+      renderedVideos++;
+      return (
+        <div key={video.id} className={STYLE.Box}>
+          <ReactPlayer url={video.videoUrl} height={280} width={390} />
+        </div>
+      );
+    }
+    return null;
+  });
+
   return (
     <>
       <section className={STYLE.container}>
         <p className={STYLE.heading}>Fitness</p>
 
-        {/*Muscles*/}
-        <div className={STYLE.startBox}>
-          <p className={STYLE.h3}>Bevorzugte Muskelgruppen</p>
-          <div className={STYLE.startBox2}>
-            <ul className={STYLE.ul}>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Bauch</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Arme</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Bauch, Beine, Po</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Po</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Beine</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Beckenboden</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Ganzkörper</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Rücken</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Unterkörper</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineUser className={STYLE.icon} />
-                  <div className={STYLE.h4}>Oberkörper</div>
-                </li>
-              </div>
-            </ul>
-          </div>
-        </div>
+        {/*Videos */}
+        <button onClick={() => setSelectedCategory("beginner")}>
+          Anfänger
+        </button>
+        <button onClick={() => setSelectedCategory("advanced")}>
+          Fortgeschritten
+        </button>
+        <button onClick={() => setSelectedCategory("all")}>
+          Zeige alle Videos
+        </button>
 
-        {/*Training*/}
-        <div className={STYLE.startBox}>
-          <p className={STYLE.h3}>wie möchtest du trainieren?</p>
-          <div className={STYLE.startBox2}>
-            <ul className={STYLE.ul}>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineBolt className={STYLE.icon2} />
-                  <div className={STYLE.h4}>Figurtraining</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineBolt className={STYLE.icon2} />
-                  <div className={STYLE.h4}>Stretching</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineBolt className={STYLE.icon2} />
-                  <div className={STYLE.h4}>Yoga</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineBolt className={STYLE.icon2} />
-                  <div className={STYLE.h4}>HIIT</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineBolt className={STYLE.icon2} />
-                  <div className={STYLE.h4}>Krafttraining</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineBolt className={STYLE.icon2} />
-                  <div className={STYLE.h4}>Cardio</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineBolt className={STYLE.icon2} />
-                  <div className={STYLE.h4}>Pilates</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineBolt className={STYLE.icon2} />
-                  <div className={STYLE.h4}>Tanzen</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineBolt className={STYLE.icon2} />
-                  <div className={STYLE.h4}>Entspannung</div>
-                </li>
-              </div>
-            </ul>
-          </div>
-        </div>
-
-        {/*Time*/}
-        <div className={STYLE.startBox}>
-          <p className={STYLE.h3}>wie lange möchtest du trainieren?</p>
-          <div className={STYLE.startBox2}>
-            <ul className={STYLE.ul}>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineClock className={STYLE.icon3} />
-                  <div className={STYLE.h4}>10</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineClock className={STYLE.icon3} />
-                  <div className={STYLE.h4}>10-20</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineClock className={STYLE.icon3} />
-                  <div className={STYLE.h4}>20-30</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineClock className={STYLE.icon3} />
-                  <div className={STYLE.h4}>30-50</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineClock className={STYLE.icon3} />
-                  <div className={STYLE.h4}>60</div>
-                </li>
-              </div>
-            </ul>
-          </div>
-        </div>
-
-        {/*Level*/}
-        <div className={STYLE.startBox}>
-          <p className={STYLE.h3}>Level</p>
-          <div className={STYLE.startBox2}>
-            <ul className={STYLE.ul}>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineFaceSmile className={STYLE.icon} />
-                  <div className={STYLE.h4}>Anfängerfreundlich</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineFaceSmile className={STYLE.icon} />
-                  <div className={STYLE.h4}>Mittel</div>
-                </li>
-              </div>
-              <div className={STYLE.startBox3}>
-                <li className={STYLE.li}>
-                  <HiOutlineFaceSmile className={STYLE.icon} />
-                  <div className={STYLE.h4}>Advance</div>
-                </li>
-              </div>
-            </ul>
-          </div>
-        </div>
-
-        {/* Workout-recommendation */}
-        <div className={STYLE.startBox}>
-          <p className={STYLE.h3}>Workout-Empfehlung für dich</p>
-          <img className={STYLE.img}></img>
-        </div>
+        <div>{showAllVideos}</div>
 
         {/* Progress + Favorite */}
         <div className={STYLE.startBox4}>
