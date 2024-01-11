@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import ReactPlayer from "react-player/youtube";
+import videos from "../components/Media";
+import _ from "lodash";
 
 import {
   HiOutlineMagnifyingGlass,
@@ -53,7 +56,8 @@ const LandingPage = () => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-
+  // für die Videos
+  const [selectedCategory, setSelectedCategory] = useState("all");
   // die daten von dem Cookie lesen.
   useEffect(() => {
     const cookieValue = document.cookie
@@ -75,138 +79,59 @@ const LandingPage = () => {
     }
   }, []);
 
+  const filteredVideos =
+    selectedCategory === "all"
+      ? videos
+      : videos.filter((video) => video.category === selectedCategory);
+
+  const randomVideos = _.shuffle(filteredVideos);
+
+  /*  const showAllVideos = randomVideos.map((video) => (
+    <div key={video.id} className={STYLE.Box}>
+      <ReactPlayer url={video.videoUrl} height={300} width={400} />
+    </div>
+  )); */
+
+  let renderedVideos = 0;
+
+  const showAllVideos = randomVideos.map((video) => {
+    if (renderedVideos <= 4) {
+      renderedVideos++;
+      return (
+        <div key={video.id} className={STYLE.Box}>
+          <ReactPlayer url={video.videoUrl} height={300} width={400} />
+        </div>
+      );
+    }
+    return null; // Wenn mehr als fünf Videos gerendert wurden, gib null zurück (oder irgendetwas, das nicht gerendert wird)
+  });
+
   return (
     <>
       <section className={STYLE.container}>
         <img src={LandingImage1}></img>
         <section className={STYLE.contentContainer}>
           <div className={STYLE.Box}>
-            <p className={STYLE.h1}>{username == "" ? "Hallo, Gast" : `Hallo, ${username}`}</p>
-            {/* Search */}
-            <div>
-              <ul>
-                <div className={STYLE.Box5}>
-                  <div>
-                    <HiOutlineMagnifyingGlass className={STYLE.icon4} />
-                  </div>
-                  <li className={STYLE.li}>
-                    <div className={STYLE.h4}>
-                      <div className={STYLE.input}>
-                        <Link to="/all">
-                          Suche nach Kategorie, Dauer, Schwerigkeit...
-                        </Link>
-                      </div>
-                    </div>
-                  </li>
-                </div>
-              </ul>
-            </div>
+            <p className={STYLE.h1}>
+              {username == "" ? "Hallo, Gast" : `Hallo, ${username}`}
+            </p>
           </div>
-
-          {/* Mix from all genres */}
-          <p className={STYLE.h3}>Häufig gesucht</p>
-          <div className={STYLE.Box}>
-            <div className={STYLE.Box2}>
-              <ul className={STYLE.ul}>
-                <div className={STYLE.Box3}>
-                  <li className={STYLE.li}>
-                    <HiOutlineBolt className={STYLE.icon2} />
-                    <div className={STYLE.h4}>Krafttraining</div>
-                  </li>
-                </div>
-
-                <div className={STYLE.Box3}>
-                  <li className={STYLE.li}>
-                    <HiOutlineFaceSmile className={STYLE.icon} />
-                    <div className={STYLE.h4}>Anfängerfreundlich</div>
-                  </li>
-                </div>
-
-                <div className={STYLE.Box3}>
-                  <li className={STYLE.li}>
-                    <HiOutlineUser className={STYLE.icon} />
-                    <div className={STYLE.h4}>Bauch</div>
-                  </li>
-                </div>
-
-                <div className={STYLE.Box3}>
-                  <li className={STYLE.li}>
-                    <HiOutlineBolt className={STYLE.icon2} />
-                    <div className={STYLE.h4}>Entspannung</div>
-                  </li>
-                </div>
-
-                <div className={STYLE.Box3}>
-                  <li className={STYLE.li}>
-                    <HiOutlineUser className={STYLE.icon} />
-                    <div className={STYLE.h4}>Beine</div>
-                  </li>
-                </div>
-
-                <div className={STYLE.Box3}>
-                  <li className={STYLE.li}>
-                    <HiOutlineBolt className={STYLE.icon2} />
-                    <div className={STYLE.h4}>Cardio</div>
-                  </li>
-                </div>
-
-                <div className={STYLE.Box3}>
-                  <li className={STYLE.li}>
-                    <div className={STYLE.h4}>All Filter</div>
-                    <HiOutlineChevronRight
-                      className={`text-black${STYLE.icon4} `}
-                    />
-                  </li>
-                </div>
-              </ul>
-            </div>
-          </div>
-
-          {/* Program */}
-          <div className={STYLE.Box}>
-            <img className={STYLE.img}></img>
-          </div>
-
-          {/* Workout-recommendation */}
-          <div className={STYLE.Box}>
-            <p className={STYLE.h3}>Workout-Empfehlung für dich</p>
-            <img className={STYLE.img5}></img>
-          </div>
-
-          {/* Discover */}
-          <div className={STYLE.Box}>
-            <p className={STYLE.h3}>Mehr Workout entdecken</p>
-            <img className={STYLE.img4}></img>
-          </div>
-
+          {/*Videos */}
+          <button onClick={() => setSelectedCategory("beginner")}>
+            Anfänger
+          </button>
+          <button onClick={() => setSelectedCategory("advanced")}>
+            Fortgeschritten
+          </button>
+          <button onClick={() => setSelectedCategory("all")}>
+            Zeige alle Videos
+          </button>
+          <div>{showAllVideos}</div>
           {/* Nutrition */}
           <div className={STYLE.Box}>
             <div>
               <p className={STYLE.h3}>Tipps: Rezepte für gesunde Mahlzeiten</p>
               <img className={STYLE.img2} src={LandingImage2}></img>
-            </div>
-          </div>
-
-          {/* Progress + Favorite */}
-          <div className={STYLE.Box}>
-            <p className={STYLE.h3}>Sporttrainer mit hohen Zugriffszahlen</p>
-          </div>
-          <div className={STYLE.Box4}>
-            <div className="grid grid-rows-auto ">
-              <img src={LandingImage3}></img>
-              <h5 className={STYLE.h5}>Ergotioua</h5>
-            </div>
-            <div className="grid grid-rows-auto">
-              <img src={LandingImage4}></img>
-              <h5 className={STYLE.h5}>Sascha Huber</h5>
-            </div>
-            <div className="grid grid-rows-auto">
-              <img src={LandingImage5}></img>
-              <h5 className={STYLE.h5}>Marie Steffen</h5>
-            </div>
-            <div className="grid grid-rows-auto">
-              <img src={LandingImage6}></img>
-              <h5 className={STYLE.h5}>Heimat Krankenkasse</h5>
             </div>
           </div>
         </section>
