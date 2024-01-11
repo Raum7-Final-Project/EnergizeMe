@@ -23,14 +23,16 @@ const registerUser = asyncHandler(async (req, res) => {
   await sendEmail(user.email, "Verify Email", verificationLink);
 
   res.status(StatusCodes.CREATED).json({
-    user: { username: user.username },
+    user: { username: user.username, id: user._id },
     token,
+    message: "An email sent to your account. Please verify",
   });
 });
 
 const verificationUser = asyncHandler(async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
+    console.log(req.params.id);
 
     if (!user) return res.status(400).send("Invalid ");
 
@@ -45,6 +47,9 @@ const verificationUser = asyncHandler(async (req, res) => {
     await User.updateOne({ _id: user._id }, { $set: { verified: true } });
 
     //await Token.findByIdAndDelete(token._id);
+    await Token.findOneAndDelete({ userId: user.id, token: req.params.token });
+
+    console.log(`Deleted token with ID: ${token.userId}`);
 
     res.send("email verified sucessfully");
   } catch (error) {
