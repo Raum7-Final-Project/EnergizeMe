@@ -20,7 +20,7 @@ const MainRoutes = [
   { path: "/diet", element: <DietPage />, id: 7 },
   { path: "/landing", element: <LandingPage />, id: 8 },
   { path: "/all", element: <AllFilterPage />, id: 9 },
-  { path: "/verify/:id/:token", element: <VerificationPage /> },
+  { path: "/verify/:id/:token", element: <VerificationPage />, id: 10 },
 
   { path: "*", element: <NotFound />, id: 11 },
 ];
