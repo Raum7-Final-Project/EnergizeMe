@@ -142,19 +142,19 @@ const ProfilePage = () => {
 
   const fitnessLevels = [
     {
-      text: "Anfänger",
+      text: "Nicht so fit",
       icon: <HiOutlineChartBar className={STYLE.goalsIcons} />,
       description: "Sehr selten bis gar kein Sport",
     },
-    /*  {
+    {
       text: "Relativ fit",
       icon: <HiOutlineChartBar className={STYLE.goalsIcons} />,
       description: "1-2 mal Sport die Woche",
-    }, */
+    },
     {
-      text: "Fortgeschrittener",
+      text: "Super fit",
       icon: <HiOutlineChartBar className={STYLE.goalsIcons} />,
-      description: "Mehr als 3 mal Sport die Woche",
+      description: "Mehr als 2 mal Sport die Woche",
     },
   ];
 
@@ -248,9 +248,9 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/*DU BIST? */}
+        {/* WIE FIT BIST DU? */}
         <div>
-          <h4 className={STYLE.heading}>Dein Fitnesslevel?</h4>
+          <h4 className={STYLE.heading}>Wie fit bist du?</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="flex flex-col items-center gap-1">
               {fitnessLevels.map((level, index) => (
@@ -300,7 +300,7 @@ const ProfilePage = () => {
         </div>
 
         {/* FITNESSPROFIL */}
-        {/* <div>
+        <div>
           <h4 className={STYLE.heading}>Dein persönliches Fitnessprofil</h4>
           <div className={STYLE.sectionContainer}>
             <div className="grid grid-cols-2 grid-rows-2 gap-3">
@@ -336,7 +336,7 @@ const ProfilePage = () => {
               />
             </div>
           </div>
-        </div> */}
+        </div>
 
         {/* UPDATE KNOPF - SPEICHERT NEUE INFO */}
         <div className="text-center">

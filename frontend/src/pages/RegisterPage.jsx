@@ -27,13 +27,10 @@ const RegisterPage = () => {
         email: String(inputs.email),
         password: String(inputs.password),
       });
-      console.log(response.data);
-      console.log(response.data.user);
 
       if (response.data) {
         const token = response.data.token;
         const id = response.data.user.id;
-        console.log("User ID and Token:", id, token);
 
         navigate(`/verify/${id}/${token}`);
         //navigate("/progress");

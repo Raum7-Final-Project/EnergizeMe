@@ -117,23 +117,11 @@ const updateProfile = asyncHandler(async (req, res) => {
     return;
   }
 
-  if (workoutsPerWeek !== undefined) {
-    user.workoutsPerWeek = workoutsPerWeek;
-  }
-
-  if (birthdate !== undefined) {
-    user.birthdate = birthdate;
-  }
-
-  if (weight !== undefined) {
-    user.weight = weight;
-  }
-  if (fitnessGoal !== undefined) {
-    user.fitnessGoal = fitnessGoal;
-  }
-  if (fitnessLevel !== undefined) {
-    user.fitnessLevel = fitnessLevel;
-  }
+  user.workoutsPerWeek =
+    workoutsPerWeek !== undefined ? workoutsPerWeek : user.workoutsPerWeek;
+  user.fitnessGoal = fitnessGoal !== undefined ? fitnessGoal : user.fitnessGoal;
+  user.fitnessLevel =
+    fitnessLevel !== undefined ? fitnessLevel : user.fitnessLevel;
 
   await user.save();
 

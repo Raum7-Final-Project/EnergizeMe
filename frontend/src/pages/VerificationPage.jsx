@@ -30,9 +30,9 @@ const VerificationPage = () => {
   return (
     <div className={STYLE.container}>
       <div className="row-span-3">
-        <h2 className="text-2xl">erfolgreich verifiziert</h2>
+        <h2 className="text-2xl">Erfolgreich verifiziert</h2>
         <button>
-          <a href="/user/*"> weiter zum Profil</a>
+          <a href="/login"> Log dich ein 😠</a>
         </button>
       </div>
       <div className="text-center">
