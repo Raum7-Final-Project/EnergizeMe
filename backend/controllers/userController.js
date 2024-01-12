@@ -47,7 +47,7 @@ const verificationUser = asyncHandler(async (req, res) => {
     await User.updateOne({ _id: user._id }, { $set: { verified: true } });
 
     //await Token.findByIdAndDelete(token._id);
-    await Token.findOneAndDelete({ userId: user.id, token: req.params.token });
+    // await Token.findOneAndDelete({ userId: user.id, token: req.params.token });
 
     console.log(`Deleted token with ID: ${token.userId}`);
 
