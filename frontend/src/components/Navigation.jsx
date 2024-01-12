@@ -6,7 +6,7 @@ import {
   HiOutlineUserCircle,
 } from "react-icons/hi2";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
   const STYLE = {
@@ -15,6 +15,8 @@ const Navigation = () => {
     li: `text-[#B1BDBD]`,
     icon: `text-[38px]`,
     link: `flex flex-col items-center text-[12px]`,
+    // class for if link is active
+    activeLink: `text-[#5a5c5c]`,
   };
 
   return (
@@ -22,35 +24,61 @@ const Navigation = () => {
       {/* MOBILE NAVIGATION MENU */}
       <ul className={STYLE.ul}>
         <li className={STYLE.li}>
-        <Link to="/landing" className={STYLE.link}>
-          <HiOutlineHome className={STYLE.icon} />
+          <NavLink
+            to="/landing"
+            className={({ isActive }) =>
+              isActive ? `${STYLE.link} + ${STYLE.activeLink}` : `${STYLE.link}`
+            }
+          >
+            <HiOutlineHome className={STYLE.icon} />
             Home
-          </Link>
+          </NavLink>
         </li>
         <li className={STYLE.li}>
-        <Link to="/fitness" className={STYLE.link}>
-          <HiOutlinePlayCircle className={STYLE.icon} />
+          <NavLink
+            to="/fitness"
+            className={({ isActive }) =>
+              isActive ? `${STYLE.link} + ${STYLE.activeLink}` : `${STYLE.link}`
+            }
+          >
+            <HiOutlinePlayCircle className={STYLE.icon} />
             Fitness
-          </Link>
+          </NavLink>
         </li>
         <li className={STYLE.li}>
-          <Link to="/progress" className={STYLE.link}>
-          <HiOutlinePresentationChartLine className={STYLE.icon} />
+          <NavLink
+            to="/progress"
+            className={({ isActive }) =>
+              isActive ? `${STYLE.link} + ${STYLE.activeLink}` : `${STYLE.link}`
+            }
+          >
+            <HiOutlinePresentationChartLine className={STYLE.icon} />
             Fortschritt
-          </Link>
+          </NavLink>
         </li>
         <li className={STYLE.li}>
-          <Link to="/diet" className={STYLE.link}>
-          <HiOutlineHeart className={STYLE.icon} />
+          <NavLink
+            to="/diet"
+            className={({ isActive }) =>
+              isActive ? `${STYLE.link} + ${STYLE.activeLink}` : `${STYLE.link}`
+            }
+          >
+            <HiOutlineHeart className={STYLE.icon} />
             Ernährung
-          </Link>
+          </NavLink>
         </li>
         <li className={STYLE.li}>
-          <Link to="/user" className={STYLE.link}>
-          <HiOutlineUserCircle className={STYLE.icon} />
+          <NavLink
+            to="/user"
+            className={({ isActive }) =>
+              isActive ? `${STYLE.link} + ${STYLE.activeLink}` : `${STYLE.link}`
+            }
+          >
+            <HiOutlineUserCircle className={STYLE.icon} />
             Profil
-          </Link>
+          </NavLink>
         </li>
+        <li className={STYLE.li}></li>
       </ul>
     </nav>
   );
