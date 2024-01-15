@@ -22,6 +22,8 @@ const userSchema = mongoose.Schema(
       required: [true, "Please provide a password"],
       minlength: 8,
     },
+    verified: { type: Boolean, default: false },
+
     fitnessLevel: {
       type: String,
     },

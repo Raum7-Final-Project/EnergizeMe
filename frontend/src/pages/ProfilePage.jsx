@@ -10,7 +10,7 @@ import {
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-const URL = "http://localhost:5554/api/users";
+const URL = "http://localhost:3333/api/users";
 
 const ProfilePage = () => {
   const STYLE = {
@@ -52,8 +52,11 @@ const ProfilePage = () => {
   // die daten von dem Cookie lesen.
   useEffect(() => {
     const cookieValue = document.cookie
+
       .split("; ")
       .find((row) => row.startsWith("username="));
+    console.log(cookieValue);
+    console.log(document.cookie);
 
     if (cookieValue) {
       const [, storedUsername] = cookieValue.split("=");
@@ -142,19 +145,14 @@ const ProfilePage = () => {
 
   const fitnessLevels = [
     {
-      text: "Nicht so fit",
+      text: "Anfänger",
       icon: <HiOutlineChartBar className={STYLE.goalsIcons} />,
       description: "Sehr selten bis gar kein Sport",
     },
     {
-      text: "Relativ fit",
+      text: "Fortgeschrittener",
       icon: <HiOutlineChartBar className={STYLE.goalsIcons} />,
       description: "1-2 mal Sport die Woche",
-    },
-    {
-      text: "Super fit",
-      icon: <HiOutlineChartBar className={STYLE.goalsIcons} />,
-      description: "Mehr als 2 mal Sport die Woche",
     },
   ];
 
@@ -250,7 +248,7 @@ const ProfilePage = () => {
 
         {/* WIE FIT BIST DU? */}
         <div>
-          <h4 className={STYLE.heading}>Wie fit bist du?</h4>
+          <h4 className={STYLE.heading}>Dein Fitnesslevel?</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="flex flex-col items-center gap-1">
               {fitnessLevels.map((level, index) => (
@@ -296,45 +294,6 @@ const ProfilePage = () => {
                 </button>
               ))}
             </ul>
-          </div>
-        </div>
-
-        {/* FITNESSPROFIL */}
-        <div>
-          <h4 className={STYLE.heading}>Dein persönliches Fitnessprofil</h4>
-          <div className={STYLE.sectionContainer}>
-            <div className="grid grid-cols-2 grid-rows-2 gap-3">
-              <label
-                htmlFor="birthdate"
-                className={focusBirthdate ? "text-[#C3C3B8]" : ""}
-              >
-                Geburtsdatum
-              </label>
-              <input
-                type="date"
-                id="birthdate"
-                value={selectedBirthdate}
-                onChange={(e) => setSelectedBirthdate(e.target.value)}
-                onFocus={() => setFocusBirthdate(true)}
-                onBlur={() => setFocusBirthdate(false)}
-              />
-              <label
-                htmlFor="weight"
-                className={focusWeight ? "text-[#C3C3B8]" : ""}
-              >
-                Gewicht
-              </label>
-              <input
-                type="text"
-                id="weight"
-                placeholder="70.5 kg"
-                value={selectedWeight}
-                onChange={(e) => setSelectedWeight(e.target.value)}
-                onFocus={() => setFocusWeight(true)}
-                onBlur={() => setFocusWeight(false)}
-                className=""
-              />
-            </div>
           </div>
         </div>
 

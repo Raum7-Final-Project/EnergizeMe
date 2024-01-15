@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-const URL = "http://localhost:5554/api/users";
+const URL = "http://localhost:3333/api/users";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
@@ -10,6 +10,7 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handelChange = (e) => {
@@ -20,30 +21,64 @@ const RegisterPage = () => {
     // console.log(e.target.name, "value", e.target.value);
   };
 
+  //Input validation
+  const validateInputs = () => {
+    const { username, email, password } = inputs;
+
+    if (!username || !email || !password) {
+      setError("Bitte fülle alle Felder aus.");
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Bitte gib eine gültige E-Mail-Adresse ein.");
+      return false;
+    }
+
+    if (password.length < 6) {
+      setError("Das Passwort muss mindestens 6 Zeichen lang sein.");
+      return false;
+    }
+
+    setError("");
+    return true;
+  };
+
   const sendRequest = async () => {
-    await axios
-      .post(URL, {
+    try {
+      const response = await axios.post("http://localhost:3333/api/users", {
         username: String(inputs.username),
         email: String(inputs.email),
         password: String(inputs.password),
-      })
-      .then((res) => res.data);
+      });
+
+      if (response.data) {
+        const token = response.data.token;
+        const id = response.data.user.id;
+
+        navigate(`/verify/${id}/${token}`);
+        //navigate("/progress");
+      }
+    } catch (error) {
+      console.error("Fehler:", error);
+    }
   };
 
   const handelSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await sendRequest();
+    if (validateInputs()) {
+      try {
+        await sendRequest();
 
-      setInputs({
-        username: "",
-        email: "",
-        password: "",
-      });
-      navigate("/login");
-    } catch (error) {
-      console.error("Fehler:", error);
+        setInputs({
+          username: "",
+          email: "",
+          password: "",
+        });
+      } catch (error) {
+        console.error("Fehler:", error);
+      }
     }
   };
   const STYLE = {
@@ -92,6 +127,7 @@ const RegisterPage = () => {
               onChange={handelChange}
               value={inputs.password}
             />
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
 
           <div className="m-auto row-span-1">
