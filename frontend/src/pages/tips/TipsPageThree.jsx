@@ -32,22 +32,22 @@ const TipsPageThree = () => {
                 <div className={STYLE.tipsContent}>
                     <ol>
                         <ul className={STYLE.list}><b>Bedeutung von Calcium: </b>
-                            <li>- Calcium ist entscheidend für die Knochendichte und spielt eine Rolle bei der Reizübertragung in Muskeln und Nerven</li>
-                            <li>- Es ist wichtig für die Signalübermittlung innerhalb von Zellen und sorgt für die Stabilität von Zellmembranen</li>
-                            <li>- Calcium ist auch relevant für die Blutgerinnung und wird in den Knochen gespeichert</li>
+                            <li className={STYLE.list}>- Calcium ist entscheidend für die Knochendichte und spielt eine Rolle bei der Reizübertragung in Muskeln und Nerven</li>
+                            <li className={STYLE.list}>- Es ist wichtig für die Signalübermittlung innerhalb von Zellen und sorgt für die Stabilität von Zellmembranen</li>
+                            <li className={STYLE.list}>- Calcium ist auch relevant für die Blutgerinnung und wird in den Knochen gespeichert</li>
                         </ul>
                         <ul className={STYLE.list}><b>Folgen von Calciummangel:</b>
-                            <li>- Zu wenig Calcium kann zu einer geringeren Mineralisierung der Knochen führen, was Osteoporose oder Rachitis bei Kindern verursachen kann</li>
-                            <li>- Calciummangel tritt selten auf und kann durch unausgewogene Ernährung, vegane Ernährung, Laktoseintoleranz oder erhöhten Calciumbedarf entstehen</li>
+                            <li className={STYLE.list}>- Zu wenig Calcium kann zu einer geringeren Mineralisierung der Knochen führen, was Osteoporose oder Rachitis bei Kindern verursachen kann</li>
+                            <li className={STYLE.list}>- Calciummangel tritt selten auf und kann durch unausgewogene Ernährung, vegane Ernährung, Laktoseintoleranz oder erhöhten Calciumbedarf entstehen</li>
                         </ul>
                         <ul className={STYLE.list}><b>Ursachen von Calciumüberversorgung:</b>
-                            <li>- Eine erhöhte Calciumzufuhr kann zu einem erhöhten Calciumspiegel führen (Hypercalcämie)</li>
-                            <li>- Überversorgung tritt oft durch Nahrungsergänzungsmittel mit Calcium oder Vitamin D sowie durch Diuretika im Zusammenhang mit Nieren- oder Schilddrüsenerkrankungen auf</li>
+                            <li className={STYLE.list}>- Eine erhöhte Calciumzufuhr kann zu einem erhöhten Calciumspiegel führen (Hypercalcämie)</li>
+                            <li className={STYLE.list}>- Überversorgung tritt oft durch Nahrungsergänzungsmittel mit Calcium oder Vitamin D sowie durch Diuretika im Zusammenhang mit Nieren- oder Schilddrüsenerkrankungen auf</li>
                         </ul>
                         <ul className={STYLE.list}><b>Lebensmittel mit hohem Calciumgehalt:</b>
-                            <li>- Milchprodukte wie Milch, Joghurt und Hartkäse sind reich an Calcium</li>
-                            <li>- Auch Gemüsesorten wie Grünkohl, Spinat und Staudensellerie sowie Nüsse und Samen (z.B., Pistazien, Mohnsamen) liefern hohe Calciummengen</li>
-                            <li>- Eine ausgewogene Ernährung mit verschiedenen Lebensmitteln trägt zur Deckung des Calcium-Tagesbedarfs bei</li>
+                            <li className={STYLE.list}>- Milchprodukte wie Milch, Joghurt und Hartkäse sind reich an Calcium</li>
+                            <li className={STYLE.list}>- Auch Gemüsesorten wie Grünkohl, Spinat und Staudensellerie sowie Nüsse und Samen (z.B., Pistazien, Mohnsamen) liefern hohe Calciummengen</li>
+                            <li className={STYLE.list}>- Eine ausgewogene Ernährung mit verschiedenen Lebensmitteln trägt zur Deckung des Calcium-Tagesbedarfs bei</li>
                         </ul>
                     </ol>
                                     

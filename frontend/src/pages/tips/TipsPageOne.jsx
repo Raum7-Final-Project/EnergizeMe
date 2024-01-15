@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+/* import { useHistory } from "react-router-dom"; */
 
 
 const TipsPageOne = () => {
@@ -27,6 +28,16 @@ const TipsPageOne = () => {
                 <div className={STYLE.backButton}>
                 
                 <Link to="/diet">Zurück</Link>
+                
+                    {/* export const Item = () => {
+                        let history = useHistory();
+                            
+                        return (
+                                    <>
+                                      <button onClick={() => history.goBack()}>Back</button>
+                                   </>
+                                );
+                            }; */}
 
                 </div>
                 <div className={STYLE.tipsContent}>
