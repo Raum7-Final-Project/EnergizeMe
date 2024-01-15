@@ -9,6 +9,9 @@ import DietPage from "../pages/DietPage";
 import LandingPage from "../pages/LandingPage";
 import AllFilterPage from "../pages/AllFilterPage";
 import VerificationPage from "../pages/VerificationPage";
+import TipsPageOne from "../pages/tips/TipsPageOne";
+import TipsPageTwo from "../pages/tips/TipsPageTwo";
+import TipsPageThree from "../pages/tips/TipsPageThree";
 
 const MainRoutes = [
   { path: "/", element: <Home />, id: 1 },
@@ -20,9 +23,16 @@ const MainRoutes = [
   { path: "/diet", element: <DietPage />, id: 7 },
   { path: "/landing", element: <LandingPage />, id: 8 },
   { path: "/all", element: <AllFilterPage />, id: 9 },
+
   { path: "/verify/:id/:token", element: <VerificationPage />, id: 10 },
 
-  { path: "*", element: <NotFound />, id: 11 },
+  { path: "/tips1", element: <TipsPageOne />, id: 11},
+  { path: "/tips2", element: <TipsPageTwo />, id: 12},
+  { path: "/tips3", element: <TipsPageThree />, id: 13},
+
+
+
+  { path: "*", element: <NotFound />, id: 44 },
 ];
 
 export default MainRoutes;
