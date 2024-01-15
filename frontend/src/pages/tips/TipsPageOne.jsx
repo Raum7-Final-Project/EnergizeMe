@@ -19,7 +19,7 @@ const TipsPageOne = () => {
 
     return (
         <div className={STYLE.container}>
-            <h2 className={STYLE.h2}>Tips</h2>
+            <h2 className={STYLE.h2}>Tipps</h2>
             {/* AOK links/info zusammen gefasst */}
             <div className={STYLE.tipsContainer}>
                 {/* 10 Schlafmythen */}
