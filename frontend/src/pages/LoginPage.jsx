@@ -16,6 +16,7 @@ const LoginPage = () => {
   };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -23,41 +24,62 @@ const LoginPage = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+  //Input validation
+  const validateInputs = () => {
+    if (!email || !password) {
+      setError("Bitte fülle alle Felder aus.");
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Bitte gib eine gültige E-Mail-Adresse ein.");
+      return false;
+    }
+
+    setError("");
+    return true;
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(URL, {
-        email: email,
-        password: password,
-      });
+    if (validateInputs()) {
+      try {
+        const response = await axios.post(URL, {
+          email: email,
+          password: password,
+        });
 
-      console.log("Login erfolgreich:", response.data);
-      const username = response.data.user.username;
-      const token = response.data.token;
+        console.log("Login erfolgreich:", response.data);
+        const username = response.data.user.username;
+        const token = response.data.token;
 
-      console.log(username, email, token);
-      document.cookie = `email=${email}`;
-      document.cookie = `username=${username}`;
-      document.cookie = `token=${token}`;
-      setEmail("");
-      setPassword("");
+        console.log(username, email, token);
+        document.cookie = `email=${email}`;
+        document.cookie = `username=${username}`;
+        document.cookie = `token=${token}`;
+        setEmail("");
+        setPassword("");
 
-      navigate("/landing");
-    } catch (error) {
-      if (error.response) {
-        console.error("Fehler beim Server:", error.response.data);
-      } else {
-        console.error(error.message);
+        navigate("/landing");
+      } catch (error) {
+        if (error.response) {
+          console.error("Fehler beim Server:", error.response.data);
+          setError("Falsche E-Mail-Adresse oder falsches Passwort.");
+        } else {
+          console.error(error.message);
+        }
       }
     }
   };
-  const { t } = useTranslation("common");
+
   const handleRegisterClick = () => {
     // Hier wird zur Register-Seite navigiert
     navigate("/register");
   };
+  const { t } = useTranslation("common");
+
   return (
     <form onSubmit={handleLogin} className={STYLE.form}>
       <h2 className={STYLE.heading}>{t("loginPage.siteTitle")}</h2>
@@ -81,6 +103,7 @@ const LoginPage = () => {
           onChange={handlePasswordChange}
           value={password}
         />
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
 
       <div className="m-auto">

@@ -4,7 +4,9 @@ import ProgressImage2 from "../assets/images/HandsPhone.svg";
 import ReactPlayer from "react-player/youtube";
 import videos from "../components/Media";
 import _ from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+const URL = "http://localhost:3333/api/users/profile";
 
 const FitnessPage = () => {
   const STYLE = {
@@ -33,9 +35,37 @@ const FitnessPage = () => {
 
     img3: `bg-[#c3c3b8]  bg-cover bg-center bg-no-repeat h-56 w-screen`,
   };
+
+  // UserPrfile abrufen :
+
   /* videos/mediaplayer */
 
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const authToken = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("token="));
+        console.log(authToken);
+
+        const response = await axios.get(URL, {
+          headers: {
+            authorization: `Bearer ${authToken.split("=")[1]}`,
+          },
+        });
+
+        setUserData(response.data.user);
+      } catch (error) {
+        console.error("Error fetching user profile", error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+  console.log("User Profile: ", userData);
 
   const filteredVideos =
     selectedCategory === "all"
