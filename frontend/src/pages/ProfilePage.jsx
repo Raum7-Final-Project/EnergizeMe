@@ -52,8 +52,11 @@ const ProfilePage = () => {
   // die daten von dem Cookie lesen.
   useEffect(() => {
     const cookieValue = document.cookie
+
       .split("; ")
       .find((row) => row.startsWith("username="));
+    console.log(cookieValue);
+    console.log(document.cookie);
 
     if (cookieValue) {
       const [, storedUsername] = cookieValue.split("=");
