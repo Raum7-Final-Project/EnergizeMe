@@ -10,6 +10,7 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handelChange = (e) => {
@@ -18,6 +19,29 @@ const RegisterPage = () => {
       [e.target.name]: e.target.value,
     }));
     // console.log(e.target.name, "value", e.target.value);
+  };
+
+  //Input validation
+  const validateInputs = () => {
+    const { username, email, password } = inputs;
+
+    if (!username || !email || !password) {
+      setError("Bitte fülle alle Felder aus.");
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Bitte gib eine gültige E-Mail-Adresse ein.");
+      return false;
+    }
+
+    if (password.length < 6) {
+      setError("Das Passwort muss mindestens 6 Zeichen lang sein.");
+      return false;
+    }
+
+    setError("");
+    return true;
   };
 
   const sendRequest = async () => {
@@ -43,16 +67,18 @@ const RegisterPage = () => {
   const handelSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await sendRequest();
+    if (validateInputs()) {
+      try {
+        await sendRequest();
 
-      setInputs({
-        username: "",
-        email: "",
-        password: "",
-      });
-    } catch (error) {
-      console.error("Fehler:", error);
+        setInputs({
+          username: "",
+          email: "",
+          password: "",
+        });
+      } catch (error) {
+        console.error("Fehler:", error);
+      }
     }
   };
   const STYLE = {
@@ -101,6 +127,7 @@ const RegisterPage = () => {
               onChange={handelChange}
               value={inputs.password}
             />
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
 
           <div className="m-auto row-span-1">

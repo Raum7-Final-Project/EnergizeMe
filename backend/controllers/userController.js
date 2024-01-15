@@ -47,7 +47,7 @@ const verificationUser = asyncHandler(async (req, res) => {
     await User.updateOne({ _id: user._id }, { $set: { verified: true } });
 
     //await Token.findByIdAndDelete(token._id);
-    await Token.findOneAndDelete({ userId: user.id, token: req.params.token });
+    // await Token.findOneAndDelete({ userId: user.id, token: req.params.token });
 
     console.log(`Deleted token with ID: ${token.userId}`);
 
@@ -60,34 +60,52 @@ const verificationUser = asyncHandler(async (req, res) => {
 //@desc Login new user
 //@route  POST/api/users/login
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    throw new BadRequestError("Please provide email and password");
-  }
-  const user = await User.findOne({ email });
-  if (!user) {
-    throw new UnauthenticatedError("Invalid Credentials");
-  }
-  const isPasswordCorrect = await user.comparePassword(password);
-  if (!isPasswordCorrect) {
-    throw new UnauthenticatedError("Invalid Password or Email");
-  }
-  // compare password
-  const token = user.createJWT();
+    if (!email || !password) {
+      throw new BadRequestError("Please provide email and password");
+    }
 
-  res.status(StatusCodes.OK).json({
-    user: { username: user.username, email: user.email },
-    token,
-    message: "An email sent to your account. Please verify.",
-  });
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      throw new UnauthenticatedError("Invalid Credentials");
+    }
+
+    const isPasswordCorrect = await user.comparePassword(password);
+
+    if (!isPasswordCorrect) {
+      throw new UnauthenticatedError("Invalid Password or Email");
+    }
+
+    const token = user.createJWT();
+
+    res.status(StatusCodes.OK).json({
+      user: { username: user.username, email: user.email },
+      token,
+    });
+  } catch (error) {
+    if (
+      error instanceof BadRequestError ||
+      error instanceof UnauthenticatedError
+    ) {
+      res.status(StatusCodes.UNAUTHORIZED).json({ message: error.message });
+    } else {
+      console.error(error);
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "Internal Server Error" });
+    }
+  }
 };
 
 const requireAuth = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
-  console.log(token);
+  console.log("MIDDLEWARE ", token);
 
   if (!token) {
+    console.log("No Token Provided");
     return res.status(401).json({ message: "Unauthorized" });
   }
 
@@ -127,18 +145,41 @@ const updateProfile = asyncHandler(async (req, res) => {
 
   res.status(200).json({ message: "Profile updated successfully" });
 });
-//@desc get user data
-//@route  GET/api/users/me
-const getMe = asyncHandler(async (req, res) => {
-  const { _id, username, email } = await User.findById(req.user.id);
-  res.status(200).json({ id: _id, username, email });
+
+const getUserProfile = asyncHandler(async (req, res) => {
+  const userId = req.user.userId;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const userProfile = {
+      username: user.username,
+      email: user.email,
+      fitnessLevel: user.fitnessLevel,
+      fitnessGoal: user.fitnessGoal,
+      workoutsPerWeek: user.workoutsPerWeek,
+      birthdate: user.birthdate,
+      weight: user.weight,
+    };
+
+    res.status(StatusCodes.OK).json({ user: userProfile });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "An error occurred" });
+  }
 });
 
 export {
   registerUser,
   loginUser,
-  getMe,
   requireAuth,
   updateProfile,
   verificationUser,
+  getUserProfile,
 };
