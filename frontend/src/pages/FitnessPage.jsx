@@ -41,6 +41,7 @@ const FitnessPage = () => {
   /* videos/mediaplayer */
 
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedTag, setSelectedTag] = useState("")
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const FitnessPage = () => {
         const authToken = document.cookie
           .split("; ")
           .find((row) => row.startsWith("token="));
-        console.log(authToken);
+        // console.log(authToken);
 
         const response = await axios.get(URL, {
           headers: {
@@ -58,6 +59,29 @@ const FitnessPage = () => {
         });
 
         setUserData(response.data.user);
+
+        if (response.data.user) {
+          const userFitnessLevel = response.data.user.fitnessLevel;
+          const userFitnessGoal = response.data.user.fitnessGoal;
+  
+          if (userFitnessLevel == null) {
+            setSelectedCategory("all");
+          } else if (userFitnessLevel === "Anfänger") {
+            setSelectedCategory("beginner");
+          } else if (userFitnessLevel === "Fortgeschrittener") {
+            setSelectedCategory("advanced");
+          }
+
+          if (userFitnessGoal == "Abnehmen"){
+            setSelectedTag("lose-weight")
+          } else if (userFitnessGoal == "Straffen"){
+            setSelectedTag("tighten")
+          } else if (userFitnessGoal == "Muskelaufbau"){
+            setSelectedTag("muscle-building")
+          } else if (userFitnessGoal == "Beweglichkeit"){
+            setSelectedTag("mobility")
+          }
+        }
       } catch (error) {
         console.error("Error fetching user profile", error);
       }
@@ -65,12 +89,19 @@ const FitnessPage = () => {
 
     fetchUserProfile();
   }, []);
-  console.log("User Profile: ", userData);
+  // console.log("User Profile: ", userData);
+  // console.log("Category",selectedCategory);
+  // console.log("Tag",selectedTag);
+
 
   const filteredVideos =
-    selectedCategory === "all"
-      ? videos
-      : videos.filter((video) => video.category === selectedCategory);
+  selectedCategory === "all"
+    ? videos
+    : videos.filter(
+        (video) =>
+          video.category === selectedCategory &&
+          (!selectedTag || video.tags.includes(selectedTag))
+      );
 
   // randomisiert die videos
   const randomVideos = _.shuffle(filteredVideos);
