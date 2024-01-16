@@ -37,14 +37,14 @@ const ProfilePage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [selectedWorkoutsPerWeek, setSelectedWorkoutsPerWeek] = useState(0);
-  const [selectedBirthdate, setSelectedBirthdate] = useState("");
-  const [selectedWeight, setSelectedWeight] = useState("");
+ /*  const [selectedBirthdate, setSelectedBirthdate] = useState("");
+  const [selectedWeight, setSelectedWeight] = useState(""); */
   const [selectedFitnessGoal, setselectedFitnessGoal] = useState(null);
   const [selectedFitnessLevel, setselectedFitnessLevel] = useState(null);
   const [focusGoal, setFocusGoal] = useState(false);
   const [focusLevel, setFocusLevel] = useState(false);
-  const [focusBirthdate, setFocusBirthdate] = useState(false);
-  const [focusWeight, setFocusWeight] = useState(false);
+  /* const [focusBirthdate, setFocusBirthdate] = useState(false);
+  const [focusWeight, setFocusWeight] = useState(false); */
   const [focusWorkoutsPerWeek, setFocusWorkoutsPerWeek] = useState(
     Array(7).fill(false)
   );
@@ -112,8 +112,8 @@ const ProfilePage = () => {
 
       const selectedData = {
         workoutsPerWeek: selectedWorkoutsPerWeek,
-        birthdate: selectedBirthdate,
-        weight: selectedWeight,
+      /*   birthdate: selectedBirthdate,
+        weight: selectedWeight, */
         fitnessGoal: selectedFitnessGoal,
         fitnessLevel: selectedFitnessLevel,
       };

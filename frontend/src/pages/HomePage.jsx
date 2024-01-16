@@ -6,7 +6,7 @@ const HomePage = () => {
   const STYLE = {
     container: `bg-[url('https://images.unsplash.com/photo-1606903037631-f09fd0bd74b4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center bg-no-repeat h-screen w-screen grid grid-rows-1 gap-2`,
     headingBox: `flex flex-col items-center justify-center`,
-    heading: `text-4xl text-white bg-black`,
+    heading: `text-5xl text-white outline-2 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]`,
     startBox: `flex flex-col items-center`,
     button: `bg-white w-[150px] text-center p-3 rounded-full m-4 font-bold text-xl`,
   };
@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <div className={STYLE.container}>
       <div className={STYLE.headingBox}>
-        <h2 className={STYLE.heading}>{t("homePage.siteTitle")}</h2>
+        <h2 className={STYLE.heading}>EnergizeMe</h2>
       </div>
 
       <div className={STYLE.startBox}>
