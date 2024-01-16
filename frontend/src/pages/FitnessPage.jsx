@@ -13,10 +13,10 @@ const FitnessPage = () => {
     container: `bg-[#F2F2ED] bg-cover bg-center bg-no-repeat h-screen w-screen flex flex-col overflow-auto`,
     Box: `flex flex-col justify- pt-1`,
 
-    heading: `text-4xl text-[#c3c3b8] text-center font-semibold pt-3`,
+    heading: `text-4xl text-[#c3c3b8] text-center font-semibold p-5`,
 
     startBox: `flex flex-col justify-start pt-1 px-2 p-6`,
-    h3: `text-lg ml-2 font-semibold`,
+    h3: `text-lg ml-2 font-semibold text-center`,
 
     startBox2: `justify-start pt-1 px-2`,
     startBox3: `justify-start py-1 px-2 mr-1 mb-1 bg-white rounded-md`,
@@ -127,16 +127,6 @@ const FitnessPage = () => {
       <section className={STYLE.container}>
         <p className={STYLE.heading}>Fitness</p>
 
-        {/*Videos */}
-        <button onClick={() => setSelectedCategory("beginner")}>
-          Anfänger
-        </button>
-        <button onClick={() => setSelectedCategory("advanced")}>
-          Fortgeschritten
-        </button>
-        <button onClick={() => setSelectedCategory("all")}>
-          Zeige alle Videos
-        </button>
 
         <div>{showAllVideos}</div>
 
@@ -144,11 +134,11 @@ const FitnessPage = () => {
         <div className={STYLE.startBox4}>
           <div>
             <p className={STYLE.h3}>dein Fortschritt</p>
-            <img className={STYLE.img2} src={ProgressImage1}></img>
+            <Link to="*"><img className={STYLE.img2} src={ProgressImage1}></img></Link>
           </div>
           <div>
-            <p className={STYLE.h3}>gespeicherte Daten</p>
-            <img className={STYLE.img3} src={ProgressImage2}></img>
+            <p className={STYLE.h3}>Profil</p>
+            <Link to="/user/*"><img className={STYLE.img3} src={ProgressImage2}></img></Link>
           </div>
         </div>
       </section>
