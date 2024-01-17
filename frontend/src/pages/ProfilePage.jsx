@@ -137,7 +137,7 @@ const ProfilePage = () => {
     setButtonStatus("success");
     setTimeout(() => {
       setButtonStatus(null);
-    }, 3000);
+    }, 1500);
   };
   const trainingGoals = [
     { text: "Abnehmen", icon: <HiOutlineScale className={STYLE.goalsIcons} /> },
@@ -200,7 +200,7 @@ const ProfilePage = () => {
         >
           Profil
         </p>
-        <p
+        {/* <p
           className={
             activeTab == "allgemein"
               ? "border-b-[0.3rem] border-gray-300"
@@ -209,7 +209,7 @@ const ProfilePage = () => {
           onClick={() => handleTab("allgemein")}
         >
           Allgemein
-        </p>
+        </p> */}
       </div>
 
       {/* PROFIL */}
