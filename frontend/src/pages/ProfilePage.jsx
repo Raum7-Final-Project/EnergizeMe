@@ -24,11 +24,15 @@ const ProfilePage = () => {
     goalsLi: `flex w-[280px] h-12 rounded-lg shadow  bg-white items-center`,
     goalsIcons: `w-[60px] text-2xl text-[#C3C3B8] mx-2`,
     goalsText: `text-start tracking-wide`,
+    alertPending: `bg-stone-200 border-1-2 border-stone-800 text-stone-600 p-3 mt-1 `,
+    alertSuccess: `bg-green-700 border-1-2 border-green-950 text-stone-100 p-3 mt-1 `,
+    alertCritical: `bg-red-700 border-1-2 border-red-950 text-stone-100 p-3 mt-1 `,
   };
 
   const [activeTab, setActiveTab] = useState("profil");
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [buttonStatus, setButtonStatus] = useState(null);
 
   const handleTab = (tab) => {
     setActiveTab(tab);
@@ -37,7 +41,7 @@ const ProfilePage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [selectedWorkoutsPerWeek, setSelectedWorkoutsPerWeek] = useState(0);
- /*  const [selectedBirthdate, setSelectedBirthdate] = useState("");
+  /*  const [selectedBirthdate, setSelectedBirthdate] = useState("");
   const [selectedWeight, setSelectedWeight] = useState(""); */
   const [selectedFitnessGoal, setselectedFitnessGoal] = useState(null);
   const [selectedFitnessLevel, setselectedFitnessLevel] = useState(null);
@@ -112,7 +116,7 @@ const ProfilePage = () => {
 
       const selectedData = {
         workoutsPerWeek: selectedWorkoutsPerWeek,
-      /*   birthdate: selectedBirthdate,
+        /*   birthdate: selectedBirthdate,
         weight: selectedWeight, */
         fitnessGoal: selectedFitnessGoal,
         fitnessLevel: selectedFitnessLevel,
@@ -126,6 +130,18 @@ const ProfilePage = () => {
     } catch (error) {
       console.error("Fehler:", error);
     }
+  };
+
+  const handleButtonClick = () => {
+    setButtonStatus("pending");
+
+    updateProfile()
+      .then(() => {
+        setButtonStatus("success");
+      })
+      .catch(() => {
+        setButtonStatus("error");
+      });
   };
   const trainingGoals = [
     { text: "Abnehmen", icon: <HiOutlineScale className={STYLE.goalsIcons} /> },
@@ -299,9 +315,19 @@ const ProfilePage = () => {
 
         {/* UPDATE KNOPF - SPEICHERT NEUE INFO */}
         <div className="text-center">
+          {/* Zeigt eventuelle Fehlermeldungen oder Erfolge je nachdem was nun is :D */}
+          {buttonStatus === "pending" && (
+            <div className={STYLE.alertPending}>Warten...</div>
+          )}
+          {buttonStatus === "success" && (
+            <div className={STYLE.alertSuccess}>Gespeichert</div>
+          )}
+          {buttonStatus === "error" && (
+            <div className={STYLE.alertCritical}>Fehler</div>
+          )}
           <button
             className="border-2 border-[#C3C3B8] rounded-full px-2 text-[#C3C3B8] m-2 font-bold"
-            onClick={updateProfile}
+            onClick={handleButtonClick}
           >
             Update
           </button>

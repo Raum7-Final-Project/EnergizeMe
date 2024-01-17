@@ -82,10 +82,11 @@ const RegisterPage = () => {
     }
   };
   const STYLE = {
-    form: `bg-[#DADACA] grid grid-rows-3 h-screen px-5`,
+    form: `bg-slate-200 grid grid-rows-3 h-screen px-5`,
     label: `m-2 text`,
     input: `bg-white w-full p-1 border-b-2 border-[#8F8F7A]`,
     button: `bg-white w-[200px] self-center rounded-full p-2 text-[#8F8F7A] border-[#8F8F7A] border-2 text-xl`,
+    alertBox: `bg-orange-100 border-1-4 border-orange-500 text-orange-700 p-4 mt-5`,
   };
   const { t } = useTranslation("common");
   return (
@@ -127,7 +128,7 @@ const RegisterPage = () => {
               onChange={handelChange}
               value={inputs.password}
             />
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <div className={STYLE.alertBox}>{error}</div>}
           </div>
 
           <div className="m-auto row-span-1">
