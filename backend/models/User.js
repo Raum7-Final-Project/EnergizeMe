@@ -26,9 +26,11 @@ const userSchema = mongoose.Schema(
 
     fitnessLevel: {
       type: String,
+      enum: ["Anfänger", "Fortgeschrittener"],
     },
     fitnessGoal: {
       type: String,
+      enum: ["Abnehmen", "Straffen", "Muskelaufbau", "Beweglichkeit"],
     },
 
     workoutsPerWeek: {
@@ -61,9 +63,15 @@ userSchema.methods.createJWT = function () {
   );
 };
 
-userSchema.methods.comparePassword = async function (canditatePassword) {
-  const isMatch = await bcrypt.compare(canditatePassword, this.password);
-  return isMatch;
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  try {
+    const isMatch = await bcrypt.compare(candidatePassword, this.password);
+    console.log(candidatePassword);
+    console.log(this.password);
+    return isMatch;
+  } catch (error) {
+    throw new Error("Password comparison failed");
+  }
 };
 
 const User = mongoose.model("User", userSchema);

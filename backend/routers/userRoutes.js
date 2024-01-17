@@ -11,9 +11,10 @@ import {
   // getProfileUser,
 } from "../controllers/userController.js";
 router.post("/", registerUser);
-router.get("/verify/:id/:token", verificationUser);
-router.put("/", requireAuth, updateProfile);
 router.post("/login", loginUser);
-router.get("/profile", requireAuth, getUserProfile);
+router.get("/verify/:id/:token", verificationUser);
+router.use(requireAuth); // Alle nachfolgenden Routen erfordern Authentifizierung
+router.put("/", updateProfile);
+router.get("/profile", getUserProfile);
 
 export default router;

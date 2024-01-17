@@ -118,30 +118,37 @@ const requireAuth = (req, res, next) => {
   }
   next();
 };
-
+//@desc Update user
+//@route  PUT/api/users
 const updateProfile = asyncHandler(async (req, res) => {
-  const { workoutsPerWeek, birthdate, weight, fitnessGoal, fitnessLevel } =
-    req.body;
-  console.log(req.body);
+  const { workoutsPerWeek, fitnessGoal, fitnessLevel } = req.body;
+
   const userId = req.user.userId;
-  console.log(userId);
 
-  const user = await User.findById(userId);
-  console.log(user);
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      $set: {
+        workoutsPerWeek:
+          workoutsPerWeek !== undefined
+            ? workoutsPerWeek
+            : req.user.workoutsPerWeek,
+        fitnessGoal:
+          fitnessGoal !== undefined ? fitnessGoal : req.user.fitnessGoal,
+        fitnessLevel:
+          fitnessLevel !== undefined ? fitnessLevel : req.user.fitnessLevel,
+      },
+    },
+    { new: true }
+  );
 
-  if (!user) {
+  if (!updatedUser) {
     // Benutzer nicht gefunden
     res.status(404).json({ message: "User not found" });
     return;
   }
 
-  user.workoutsPerWeek =
-    workoutsPerWeek !== undefined ? workoutsPerWeek : user.workoutsPerWeek;
-  user.fitnessGoal = fitnessGoal !== undefined ? fitnessGoal : user.fitnessGoal;
-  user.fitnessLevel =
-    fitnessLevel !== undefined ? fitnessLevel : user.fitnessLevel;
-
-  await user.save();
+  console.log("updateprofile user", updatedUser);
 
   res.status(200).json({ message: "Profile updated successfully" });
 });
@@ -162,8 +169,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
       fitnessLevel: user.fitnessLevel,
       fitnessGoal: user.fitnessGoal,
       workoutsPerWeek: user.workoutsPerWeek,
-      birthdate: user.birthdate,
-      weight: user.weight,
     };
 
     res.status(StatusCodes.OK).json({ user: userProfile });
