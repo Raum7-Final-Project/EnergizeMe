@@ -137,7 +137,7 @@ const ProfilePage = () => {
     setButtonStatus("success");
     setTimeout(() => {
       setButtonStatus(null);
-    }, 3000);
+    }, 1500);
   };
   const trainingGoals = [
     { text: "Abnehmen", icon: <HiOutlineScale className={STYLE.goalsIcons} /> },
@@ -200,7 +200,7 @@ const ProfilePage = () => {
         >
           Profil
         </p>
-        <p
+        {/* <p
           className={
             activeTab == "allgemein"
               ? "border-b-[0.3rem] border-gray-300"
@@ -209,7 +209,7 @@ const ProfilePage = () => {
           onClick={() => handleTab("allgemein")}
         >
           Allgemein
-        </p>
+        </p> */}
       </div>
 
       {/* PROFIL */}
@@ -235,7 +235,7 @@ const ProfilePage = () => {
 
         {/* TRAININGSZIEL */}
         <div>
-          <h4 className={STYLE.heading}>Was ist dein Trainingsziel?</h4>
+          <h4 className={STYLE.heading}>Was ist Dein Trainingsziel?</h4>
           <div className={STYLE.sectionContainer}>
             <ul className="flex flex-col items-center gap-1">
               {trainingGoals.map((goal, index) => (
@@ -311,6 +311,7 @@ const ProfilePage = () => {
 
         {/* UPDATE KNOPF - SPEICHERT NEUE INFO */}
         <div className="text-center">
+          {/* Das klappt irgendwie noch nicht so recht */}
           {/* Zeigt eventuelle Fehlermeldungen oder Erfolge je nachdem was nun is :D */}
           {/* {buttonStatus === "pending" && (
             <div className={STYLE.alertPending}>Warten...</div>
