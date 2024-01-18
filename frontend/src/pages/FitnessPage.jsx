@@ -13,10 +13,10 @@ const FitnessPage = () => {
     container: `bg-[#F2F2ED] bg-cover bg-center bg-no-repeat h-screen w-screen flex flex-col overflow-auto`,
     Box: `flex flex-col justify- pt-1`,
 
-    heading: `text-4xl text-[#c3c3b8] text-center font-semibold pt-3`,
+    heading: `text-4xl text-[#c3c3b8] text-center font-semibold p-5`,
 
     startBox: `flex flex-col justify-start pt-1 px-2 p-6`,
-    h3: `text-lg ml-2 font-semibold`,
+    h3: `text-lg ml-2 font-semibold text-center`,
 
     startBox2: `justify-start pt-1 px-2`,
     startBox3: `justify-start py-1 px-2 mr-1 mb-1 bg-white rounded-md`,
@@ -41,6 +41,7 @@ const FitnessPage = () => {
   /* videos/mediaplayer */
 
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedTag, setSelectedTag] = useState("")
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const FitnessPage = () => {
         const authToken = document.cookie
           .split("; ")
           .find((row) => row.startsWith("token="));
-        console.log(authToken);
+        // console.log(authToken);
 
         const response = await axios.get(URL, {
           headers: {
@@ -58,6 +59,29 @@ const FitnessPage = () => {
         });
 
         setUserData(response.data.user);
+
+        if (response.data.user) {
+          const userFitnessLevel = response.data.user.fitnessLevel;
+          const userFitnessGoal = response.data.user.fitnessGoal;
+  
+          if (userFitnessLevel == null) {
+            setSelectedCategory("all");
+          } else if (userFitnessLevel === "Anfänger") {
+            setSelectedCategory("beginner");
+          } else if (userFitnessLevel === "Fortgeschrittener") {
+            setSelectedCategory("advanced");
+          }
+
+          if (userFitnessGoal == "Abnehmen"){
+            setSelectedTag("lose-weight")
+          } else if (userFitnessGoal == "Straffen"){
+            setSelectedTag("tighten")
+          } else if (userFitnessGoal == "Muskelaufbau"){
+            setSelectedTag("muscle-building")
+          } else if (userFitnessGoal == "Beweglichkeit"){
+            setSelectedTag("mobility")
+          }
+        }
       } catch (error) {
         console.error("Error fetching user profile", error);
       }
@@ -65,12 +89,19 @@ const FitnessPage = () => {
 
     fetchUserProfile();
   }, []);
-  console.log("User Profile: ", userData);
+  // console.log("User Profile: ", userData);
+  // console.log("Category",selectedCategory);
+  // console.log("Tag",selectedTag);
+
 
   const filteredVideos =
-    selectedCategory === "all"
-      ? videos
-      : videos.filter((video) => video.category === selectedCategory);
+  selectedCategory === "all"
+    ? videos
+    : videos.filter(
+        (video) =>
+          video.category === selectedCategory &&
+          (!selectedTag || video.tags.includes(selectedTag))
+      );
 
   // randomisiert die videos
   const randomVideos = _.shuffle(filteredVideos);
@@ -96,16 +127,6 @@ const FitnessPage = () => {
       <section className={STYLE.container}>
         <p className={STYLE.heading}>Fitness</p>
 
-        {/*Videos */}
-        <button onClick={() => setSelectedCategory("beginner")}>
-          Anfänger
-        </button>
-        <button onClick={() => setSelectedCategory("advanced")}>
-          Fortgeschritten
-        </button>
-        <button onClick={() => setSelectedCategory("all")}>
-          Zeige alle Videos
-        </button>
 
         <div>{showAllVideos}</div>
 
@@ -113,11 +134,11 @@ const FitnessPage = () => {
         <div className={STYLE.startBox4}>
           <div>
             <p className={STYLE.h3}>dein Fortschritt</p>
-            <img className={STYLE.img2} src={ProgressImage1}></img>
+            <Link to="*"><img className={STYLE.img2} src={ProgressImage1}></img></Link>
           </div>
           <div>
-            <p className={STYLE.h3}>gespeicherte Daten</p>
-            <img className={STYLE.img3} src={ProgressImage2}></img>
+            <p className={STYLE.h3}>Profil</p>
+            <Link to="/user/*"><img className={STYLE.img3} src={ProgressImage2}></img></Link>
           </div>
         </div>
       </section>

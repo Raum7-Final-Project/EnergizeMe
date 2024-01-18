@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useTranslation } from "react-i18next";
+/* import { useTranslation } from "react-i18next"; */
 import { useNavigate } from "react-router-dom";
 
 const URL = "http://localhost:3333/api/users/login";
@@ -8,11 +8,12 @@ const URL = "http://localhost:3333/api/users/login";
 const LoginPage = () => {
   const navigate = useNavigate();
   const STYLE = {
-    form: `bg-[#DADACA] grid grid-rows-3 h-screen px-5`,
+    form: `bg-slate-200 grid grid-rows-3 h-screen px-5`,
     heading: `text-3xl text-center my-4 text-[#8F8F7A]`,
     label: `m-2 text`,
     input: `bg-white w-full p-1 border-b-2 border-[#8F8F7A]`,
     button: `bg-white w-[200px] self-center rounded-full p-2 text-[#8F8F7A] border-[#8F8F7A] border-2 text-xl`,
+    alertBox: `bg-orange-100 border-1-4 border-orange-500 text-orange-700 p-4 mt-5`,
   };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -78,14 +79,14 @@ const LoginPage = () => {
     // Hier wird zur Register-Seite navigiert
     navigate("/register");
   };
-  const { t } = useTranslation("common");
+  /* const { t } = useTranslation("common"); */
 
   return (
     <form onSubmit={handleLogin} className={STYLE.form}>
-      <h2 className={STYLE.heading}>{t("loginPage.siteTitle")}</h2>
+      <h2 className={STYLE.heading}>Einloggen</h2>
 
       <div className="flex flex-col items-center gap-1">
-        <label htmlFor="Email">{t("loginPage.label_email")}</label>
+        <label htmlFor="Email">E-Mail</label>
         <input
           type="text"
           id="email"
@@ -94,7 +95,7 @@ const LoginPage = () => {
           onChange={handleEmailChange}
           value={email}
         />
-        <label htmlFor="Password">{t("loginPage.label_password")}</label>
+        <label htmlFor="Password">Passwort</label>
         <input
           type="password"
           id=""
@@ -103,11 +104,16 @@ const LoginPage = () => {
           onChange={handlePasswordChange}
           value={password}
         />
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && (
+          <div className={STYLE.alertBox} role="alert">
+            <p className="font-bold">Hinweis</p>
+            <p>{error}</p>
+          </div>
+        )}
       </div>
 
       <div className="m-auto">
-        <button className={STYLE.button}>{t("loginPage.btn_login")}</button>
+        <button className={STYLE.button}>Einloggen</button>
       </div>
       <div className="m-auto">
         <button
@@ -115,7 +121,7 @@ const LoginPage = () => {
           onClick={handleRegisterClick}
           className={STYLE.button}
         >
-          {t("registerPage.btn_register")}
+          Registrieren
         </button>
       </div>
     </form>
