@@ -12,6 +12,7 @@ import VerificationPage from "../pages/VerificationPage";
 import TipsPageOne from "../pages/tips/TipsPageOne";
 import TipsPageTwo from "../pages/tips/TipsPageTwo";
 import TipsPageThree from "../pages/tips/TipsPageThree";
+import ContactPage from "../pages/ContactPage";
 
 const MainRoutes = [
   { path: "/", element: <Home />, id: 1 },
@@ -26,11 +27,10 @@ const MainRoutes = [
 
   { path: "/verify/:id/:token", element: <VerificationPage />, id: 10 },
 
-  { path: "/tips1", element: <TipsPageOne />, id: 11},
-  { path: "/tips2", element: <TipsPageTwo />, id: 12},
-  { path: "/tips3", element: <TipsPageThree />, id: 13},
-
-
+  { path: "/tips1", element: <TipsPageOne />, id: 11 },
+  { path: "/tips2", element: <TipsPageTwo />, id: 12 },
+  { path: "/tips3", element: <TipsPageThree />, id: 13 },
+  { path: "/contact", element: <ContactPage />, id: 14 },
 
   { path: "*", element: <NotFound />, id: 44 },
 ];

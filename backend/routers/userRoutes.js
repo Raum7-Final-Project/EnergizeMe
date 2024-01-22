@@ -8,6 +8,7 @@ import {
   requireAuth,
   verificationUser,
   getUserProfile,
+
   // getProfileUser,
 } from "../controllers/userController.js";
 router.post("/", registerUser);

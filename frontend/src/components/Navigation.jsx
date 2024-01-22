@@ -1,17 +1,19 @@
 import {
   HiOutlineHome,
   HiOutlinePlayCircle,
-/*   HiOutlinePresentationChartLine, */
+
+  /*   HiOutlinePresentationChartLine, */
   HiOutlineHeart,
   HiOutlineUserCircle,
 } from "react-icons/hi2";
+import { HiOutlineMail } from "react-icons/hi";
 
 import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
   const STYLE = {
     nav: `h-[80px] w-full bottom-0 flex justify-center border-t-2`,
-    ul: `grid grid-cols-4 items-center w-full`,
+    ul: `grid grid-cols-5 items-center w-full`,
     li: `text-[#B1BDBD]`,
     icon: `text-[38px]`,
     link: `flex flex-col items-center text-[12px]`,
@@ -76,6 +78,17 @@ const Navigation = () => {
           >
             <HiOutlineUserCircle className={STYLE.icon} />
             Profil
+          </NavLink>
+        </li>
+        <li className={STYLE.li}>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              isActive ? `${STYLE.link} + ${STYLE.activeLink}` : `${STYLE.link}`
+            }
+          >
+            <HiOutlineMail className={STYLE.icon} />
+            Kontakt
           </NavLink>
         </li>
       </ul>
