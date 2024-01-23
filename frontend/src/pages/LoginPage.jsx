@@ -63,7 +63,7 @@ const LoginPage = () => {
         setEmail("");
         setPassword("");
 
-        navigate("/landing");
+        navigate("/user/*");
       } catch (error) {
         if (error.response) {
           console.error("Fehler beim Server:", error.response.data);

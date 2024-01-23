@@ -20,7 +20,7 @@ const NotFound = () => {
           />
           <h2 className="text-2xl text-center m-2.5">Seite nicht gefunden!</h2>
           <button className={STYLE.button}>
-            <Link to={`/`}>Zur Startseite</Link>
+            <Link to={`/landing`}>Zur Startseite</Link>
           </button>
         </div>
       </div>
