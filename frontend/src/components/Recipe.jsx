@@ -186,14 +186,14 @@ const Recipe = () => {
         <img src={getExampleImagePath(id)} alt="" className="h-full w-full" />
       </div>
       <h2 className={STYLE.h2}>{recipeDetails.title}</h2>
-      <p className="font-bold">Zutaten für 4 personen</p>
+      <p className="font-bold">Zutaten für 4 Personen</p>
       <p className="whitespace-pre-line">
         {recipeDetails.ingredients.join(", ")}
       </p>
       <p className="font-bold ">Zubereitung</p>
       <p className="whitespace-pre-line"> {recipeDetails.instructions}</p>
       <Link to="/diet" className={STYLE.button}>
-        Back to recipe list
+        Zurück
       </Link>
     </div>
   );

@@ -41,7 +41,7 @@ const FitnessPage = () => {
   /* videos/mediaplayer */
 
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedTag, setSelectedTag] = useState("")
+  const [selectedTag, setSelectedTag] = useState("");
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const FitnessPage = () => {
         if (response.data.user) {
           const userFitnessLevel = response.data.user.fitnessLevel;
           const userFitnessGoal = response.data.user.fitnessGoal;
-  
+
           if (userFitnessLevel == null) {
             setSelectedCategory("all");
           } else if (userFitnessLevel === "Anfänger") {
@@ -72,14 +72,14 @@ const FitnessPage = () => {
             setSelectedCategory("advanced");
           }
 
-          if (userFitnessGoal == "Abnehmen"){
-            setSelectedTag("lose-weight")
-          } else if (userFitnessGoal == "Straffen"){
-            setSelectedTag("tighten")
-          } else if (userFitnessGoal == "Muskelaufbau"){
-            setSelectedTag("muscle-building")
-          } else if (userFitnessGoal == "Beweglichkeit"){
-            setSelectedTag("mobility")
+          if (userFitnessGoal == "Abnehmen") {
+            setSelectedTag("lose-weight");
+          } else if (userFitnessGoal == "Straffen") {
+            setSelectedTag("tighten");
+          } else if (userFitnessGoal == "Muskelaufbau") {
+            setSelectedTag("muscle-building");
+          } else if (userFitnessGoal == "Beweglichkeit") {
+            setSelectedTag("mobility");
           }
         }
       } catch (error) {
@@ -93,15 +93,14 @@ const FitnessPage = () => {
   // console.log("Category",selectedCategory);
   // console.log("Tag",selectedTag);
 
-
   const filteredVideos =
-  selectedCategory === "all"
-    ? videos
-    : videos.filter(
-        (video) =>
-          video.category === selectedCategory &&
-          (!selectedTag || video.tags.includes(selectedTag))
-      );
+    selectedCategory === "all"
+      ? videos
+      : videos.filter(
+          (video) =>
+            video.category === selectedCategory &&
+            (!selectedTag || video.tags.includes(selectedTag))
+        );
 
   // randomisiert die videos
   const randomVideos = _.shuffle(filteredVideos);
@@ -115,7 +114,13 @@ const FitnessPage = () => {
       renderedVideos++;
       return (
         <div key={video.id} className={STYLE.Box}>
-          <ReactPlayer url={video.videoUrl} height={280} width={390} />
+          <ReactPlayer
+            url={video.videoUrl}
+            height={280}
+            width={390}
+            controls={true}
+            volume={0}
+          />
         </div>
       );
     }
@@ -127,18 +132,21 @@ const FitnessPage = () => {
       <section className={STYLE.container}>
         <p className={STYLE.heading}>Fitness</p>
 
-
         <div>{showAllVideos}</div>
 
         {/* Progress + Favorite */}
         <div className={STYLE.startBox4}>
           <div>
-            <p className={STYLE.h3}>dein Fortschritt</p>
-            <Link to="*"><img className={STYLE.img2} src={ProgressImage1}></img></Link>
+            <p className={STYLE.h3}>Dein Fortschritt</p>
+            <Link to="*">
+              <img className={STYLE.img2} src={ProgressImage1}></img>
+            </Link>
           </div>
           <div>
             <p className={STYLE.h3}>Profil</p>
-            <Link to="/user/*"><img className={STYLE.img3} src={ProgressImage2}></img></Link>
+            <Link to="/user/*">
+              <img className={STYLE.img3} src={ProgressImage2}></img>
+            </Link>
           </div>
         </div>
       </section>
