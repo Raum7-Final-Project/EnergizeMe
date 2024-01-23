@@ -46,7 +46,7 @@ const DietPage = () => {
           }
           onClick={() => handleTab("tips")}
         >
-          Tips
+          Tipps
         </p>
       </div>
 
@@ -80,22 +80,24 @@ const DietPage = () => {
       </div>
 
       {/* TIPS */}
-      <div className={activeTab == "tips" ? "" : "hidden"}>
+<div className={activeTab == "tips" ? "" : "hidden"}>
         <div className={STYLE.tipsContainer}>
-          <a href="https://www.aok.de/pk/magazin/wohlbefinden/schlaf/10-schlafmythen-im-check-das-hilft-fuer-einen-gesunden-schlaf/" target="blank">
+          <Link to="/tips1">
           <img src={ExampleImage11} alt="tips1" className={STYLE.tipsContent} />
-          </a>
+          </Link>
+          
         </div>
         <div className={STYLE.tipsContainer}>
-          <a href="https://www.aok.de/pk/magazin/ernaehrung/gesunde-ernaehrung/lebensmittel-gesund-einkaufen-so-einfach-gehts/" target="blank">
+         <Link to="/tips2">
           <img src={ExampleImage12} alt="tips2" className={STYLE.tipsContent} />
-          </a>
+         </Link>
+         
         </div>
         <div className={STYLE.tipsContainer}>
-          <a href="https://www.aok.de/pk/magazin/ernaehrung/lebensmittel/calcium-in-welchen-lebensmitteln-ist-es-enthalten/" target="blank">
+          <Link to="/tips3">
           <img src={ExampleImage13} alt="tips3" className={STYLE.tipsContent} />
+          </Link>
 
-          </a>
         </div>
       </div>
     </div>

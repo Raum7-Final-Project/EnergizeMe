@@ -1,10 +1,12 @@
 import {
   HiOutlineHome,
   HiOutlinePlayCircle,
-  HiOutlinePresentationChartLine,
+
+  /*   HiOutlinePresentationChartLine, */
   HiOutlineHeart,
   HiOutlineUserCircle,
 } from "react-icons/hi2";
+import { HiOutlineMail } from "react-icons/hi";
 
 import { NavLink } from "react-router-dom";
 
@@ -45,7 +47,7 @@ const Navigation = () => {
             Fitness
           </NavLink>
         </li>
-        <li className={STYLE.li}>
+        {/* <li className={STYLE.li}>
           <NavLink
             to="/progress"
             className={({ isActive }) =>
@@ -55,7 +57,7 @@ const Navigation = () => {
             <HiOutlinePresentationChartLine className={STYLE.icon} />
             Fortschritt
           </NavLink>
-        </li>
+        </li> */}
         <li className={STYLE.li}>
           <NavLink
             to="/diet"
@@ -78,7 +80,17 @@ const Navigation = () => {
             Profil
           </NavLink>
         </li>
-        <li className={STYLE.li}></li>
+        <li className={STYLE.li}>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              isActive ? `${STYLE.link} + ${STYLE.activeLink}` : `${STYLE.link}`
+            }
+          >
+            <HiOutlineMail className={STYLE.icon} />
+            Kontakt
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );
