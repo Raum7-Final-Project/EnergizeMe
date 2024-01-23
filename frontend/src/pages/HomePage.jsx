@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
   const STYLE = {
-    container: `bg-[url('https://images.unsplash.com/photo-1606903037631-f09fd0bd74b4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center bg-no-repeat h-screen w-screen grid grid-rows-1 gap-2`,
+    container: `bg-[#a5a58d] bg-blend-multiply bg-[url('https://images.unsplash.com/photo-1606903037631-f09fd0bd74b4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center bg-no-repeat h-screen w-screen grid grid-rows-1 gap-2`,
     headingBox: `flex flex-col items-center justify-center`,
     heading: `text-5xl text-white outline-2 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]`,
     startBox: `flex flex-col items-center`,
