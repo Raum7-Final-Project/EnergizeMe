@@ -119,7 +119,7 @@ const FitnessPage = () => {
             height={280}
             width={390}
             controls={true}
-            volume={0.1}
+            volume={0}
           />
         </div>
       );
