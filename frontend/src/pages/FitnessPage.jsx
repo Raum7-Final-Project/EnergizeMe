@@ -114,7 +114,13 @@ const FitnessPage = () => {
       renderedVideos++;
       return (
         <div key={video.id} className={STYLE.Box}>
-          <ReactPlayer url={video.videoUrl} height={280} width={390} />
+          <ReactPlayer
+            url={video.videoUrl}
+            height={280}
+            width={390}
+            controls={true}
+            volume={0.1}
+          />
         </div>
       );
     }
